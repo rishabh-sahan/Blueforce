@@ -1,0 +1,154 @@
+{
+  "header": {
+    "home": "Home",
+    "aboutUs": "About Us",
+    "services": "Services",
+    "howItWorks": "How It Works",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "browseWorkers": "Find Workers"
+  },
+  "footer": {
+    "aboutUs": "About Us",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "faq": "FAQs",
+    "careers": "Careers",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
+    "subscribeTitle": "Subscribe to Our Newsletter",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "subscribeNote": "Get updates on new jobs and opportunities",
+    "copyright": "All rights reserved.",
+    "tagline": "Empowering blue-collar workers and employers across India.",
+    "address": "123 Main Street, Bengaluru, India",
+    "phone": "+91 98765 43210",
+    "email": "info@blueforce.com"
+  },
+  "home": {
+    "hero": {
+      "title": "Connecting Skill. Creating Opportunity.",
+      "subtitle": "India's premier platform for skilled blue-collar workers and employers",
+      "workerBtn": "I'm a Worker",
+      "employerBtn": "I'm an Employer"
+    },
+    "features": {
+      "title": "Features",
+      "matching": "Smart job matching",
+      "location": "Location-based worker search",
+      "chat": "In-app chat",
+      "portfolio": "Skill video portfolio",
+      "badges": "Verified skill badges",
+      "availability": "Real-time availability",
+      "insurance": "Micro insurance",
+      "reviews": "Verified reviews"
+    },
+    "professions": {
+      "title": "Blue-Collar Professions",
+      "electrician": "Electrician",
+      "plumber": "Plumber",
+      "carpenter": "Carpenter",
+      "welder": "Welder",
+      "painter": "Painter",
+      "driver": "Driver",
+      "gardener": "Gardner",
+      "mason": "Mason",
+      "construction": "Construction worker",
+      "officeboy": "Office boy",
+      "mechanic": "Mechanic",
+      "cook": "Cook",
+      "delivery": "Delivery boy",
+      "lift": "Lift technician"
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "workerTestimonial": "BlueForce helped me find consistent work and improved my earnings by 40%.",
+      "employerTestimonial": "Finding reliable skilled workers was a challenge until we discovered BlueForce."
+    },
+    "whyUs": {
+      "title": "Why BlueForce?",
+      "value": "Value",
+      "accessibility": "Accessibility",
+      "trust": "Trust",
+      "empowerment": "Empowerment"
+    },
+    "faq": {
+      "q1": "How does BlueForce work?",
+      "a1": "BlueForce connects skilled workers with employers through a simple, secure platform. Workers create profiles, showcase their skills, and get hired for jobs that match their expertise.",
+      "q2": "Is BlueForce free to use?",
+      "a2": "Yes, BlueForce is completely free for workers. Employers pay a small fee only when they successfully hire a worker.",
+      "q3": "How do I get paid?",
+      "a3": "Payments are processed securely through our platform. Workers receive payments directly to their registered bank account after job completion.",
+      "q4": "What types of jobs are available?",
+      "a4": "We offer a wide range of blue-collar jobs including electricians, plumbers, carpenters, welders, painters, drivers, and many more.",
+      "q5": "How do I verify my skills?",
+      "a5": "You can verify your skills by uploading certificates, work samples, and completing skill assessments. This helps build trust with potential employers."
+    }
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "workerRegister": "Register as Worker",
+    "employerRegister": "Register as Employer"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "workerTitle": "For Workers",
+    "employerTitle": "For Employers",
+    "worker": {
+      "step1": "Create your profile",
+      "step2": "Upload skills & certifications",
+      "step3": "Complete verification",
+      "step4": "Set availability & get hired"
+    },
+    "employer": {
+      "step1": "Create job post",
+      "step2": "Browse qualified workers",
+      "step3": "Chat & hire",
+      "step4": "Pay & review"
+    }
+  },
+  "workerProfile": {
+    "title": "Complete Your Profile",
+    "subtitle": "Showcase your skills and experience to get hired",
+    "personalInfo": "Personal Information",
+    "professionalInfo": "Professional Information",
+    "uploadMedia": "Upload Media",
+    "verificationDocs": "Verification Documents",
+    "fullName": "Full Name",
+    "mobileNumber": "Mobile Number",
+    "currentLocation": "Current Location",
+    "bio": "Bio",
+    "primaryDomain": "Primary Domain",
+    "selectProfession": "Select your profession",
+    "workExperience": "Work Experience (years)",
+    "hourlyRate": "Hourly Rate (₹)",
+    "profilePhoto": "Profile Photo",
+    "uploadPhoto": "Upload Photo",
+    "skillVideos": "Skill Videos",
+    "uploadVideos": "Upload Videos",
+    "skillCertifications": "Skill Certifications",
+    "uploadCertificates": "Upload Certificates",
+    "governmentId": "Government ID",
+    "uploadIdDocuments": "Upload ID Documents",
+    "note": "Note:",
+    "noteText": "Your documents will be securely stored and only used for verification purposes.",
+    "back": "Back",
+    "next": "Next",
+    "submitting": "Submitting...",
+    "submitProfile": "Submit Profile"
+  },
+  "register": {
+    "fullName": "Full Name"
+  }
+}

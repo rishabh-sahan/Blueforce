@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="BlueForce">
+  <rect width="64" height="64" rx="14" fill="#2563eb"/>
+  <g fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="butt" stroke-linejoin="miter">
+    <path d="M12 18V46"/>
+    <path d="M12 18h7a7 7 0 0 1 0 14h-7"/>
+    <path d="M12 32h8a7 7 0 0 1 0 14h-8"/>
+    <path d="M39 18v28"/>
+    <path d="M39 18h15"/>
+    <path d="M39 31h11"/>
+  </g>
+</svg>
