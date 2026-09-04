@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import { listCategories, updateProfile } from '../services/profiles';
 import { Alert, Button, Field, Input, Select, Spinner, Textarea } from '../components/ui';
 import { EASE } from '../lib/motion';

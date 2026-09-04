@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { BadgeCheck, CalendarRange, LogOut, ShieldCheck, Users } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 
 const LINKS = [
   { to: '/admin/verification', labelKey: 'admin.nav.verification', icon: BadgeCheck },

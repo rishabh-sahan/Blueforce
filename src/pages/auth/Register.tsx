@@ -2,17 +2,11 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { HardHat, UserRound } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import { Alert, Button, Field, Input } from '../../components/ui';
+import GoogleButton from '../../components/GoogleButton';
+import RoleToggle, { type SignupRole } from '../../components/RoleToggle';
 import { EASE } from '../../lib/motion';
-
-type SignupRole = 'worker' | 'customer';
-
-const ROLES: { value: SignupRole; icon: typeof HardHat }[] = [
-  { value: 'worker', icon: HardHat },
-  { value: 'customer', icon: UserRound },
-];
 
 const Register = () => {
   const { t } = useTranslation();
@@ -62,34 +56,11 @@ const Register = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && <Alert>{error}</Alert>}
 
-            <fieldset>
-              <legend className="block text-sm font-semibold text-gray-700 mb-3">
-                {t('auth.register.roleQuestion')}
-              </legend>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {ROLES.map(({ value, icon: Icon }) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setRole(value)}
-                    aria-pressed={role === value}
-                    className={`text-left p-4 rounded-2xl border-2 transition-colors ${
-                      role === value
-                        ? 'border-blue-600 bg-blue-50'
-                        : 'border-gray-200 hover:border-blue-300'
-                    }`}
-                  >
-                    <Icon
-                      className={`w-6 h-6 mb-2 ${
-                        role === value ? 'text-blue-600' : 'text-gray-400'
-                      }`}
-                    />
-                    <span className="block font-semibold text-gray-900">{t(`auth.register.${value}Title`)}</span>
-                    <span className="block text-sm text-gray-600 mt-1">{t(`auth.register.${value}Blurb`)}</span>
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+            <RoleToggle
+              value={role}
+              onChange={setRole}
+              legend={t('auth.register.roleQuestion')}
+            />
 
             <Field label={t('auth.register.fullName')}>
               <Input
@@ -127,6 +98,13 @@ const Register = () => {
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? t('auth.register.submitting') : t('auth.register.submit')}
             </Button>
+
+            <GoogleButton role={role} />
+            {role === 'worker' && (
+              <p className="text-sm text-gray-500 text-center">
+                {t('auth.google.workerNote')}
+              </p>
+            )}
           </form>
         )}
 

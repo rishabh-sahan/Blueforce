@@ -2,7 +2,16 @@ import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { listAllProfiles } from '../../services/profiles';
 import { Alert, Card, Input, Spinner, StatusBadge } from '../../components/ui';
-import type { Profile } from '../../types/database';
+import type { Profile, UserRole } from '../../types/database';
+
+/** Admins are staff, so the tabs split the two kinds of end user. */
+type Tab = 'all' | 'worker' | 'customer';
+
+const TABS: { value: Tab; labelKey: string }[] = [
+  { value: 'all', labelKey: 'admin.users.tabAll' },
+  { value: 'worker', labelKey: 'admin.users.tabWorkers' },
+  { value: 'customer', labelKey: 'admin.users.tabCustomers' },
+];
 
 const Users = () => {
   const { t } = useTranslation();
@@ -10,6 +19,7 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [query, setQuery] = useState('');
+  const [tab, setTab] = useState<Tab>('all');
 
   useEffect(() => {
     listAllProfiles()
@@ -17,17 +27,6 @@ const Users = () => {
       .catch((err) => setError(err instanceof Error ? err.message : String(err)))
       .finally(() => setLoading(false));
   }, []);
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return profiles;
-    return profiles.filter(
-      (p) =>
-        p.full_name.toLowerCase().includes(q) ||
-        (p.email ?? '').toLowerCase().includes(q) ||
-        p.role.includes(q),
-    );
-  }, [profiles, query]);
 
   const counts = useMemo(
     () => ({
@@ -37,6 +36,27 @@ const Users = () => {
     }),
     [profiles],
   );
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return profiles.filter((p) => {
+      if (tab !== 'all' && p.role !== (tab as UserRole)) return false;
+      if (!q) return true;
+      return (
+        p.full_name.toLowerCase().includes(q) ||
+        (p.email ?? '').toLowerCase().includes(q) ||
+        p.role.includes(q)
+      );
+    });
+  }, [profiles, query, tab]);
+
+  const tabCount = (value: Tab) =>
+    value === 'all'
+      ? profiles.length
+      : profiles.filter((p) => p.role === (value as UserRole)).length;
+
+  // The status column only means something for workers.
+  const showStatus = tab !== 'customer';
 
   return (
     <div>
@@ -53,6 +73,27 @@ const Users = () => {
             <div className="text-3xl font-bold text-blue-600">{stat.value}</div>
             <div className="text-gray-600 text-sm mt-1">{stat.label}</div>
           </Card>
+        ))}
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-6">
+        {TABS.map(({ value, labelKey }) => (
+          <button
+            key={value}
+            onClick={() => setTab(value)}
+            aria-pressed={tab === value}
+            className={`px-5 py-2.5 rounded-full font-semibold transition-colors ${
+              tab === value
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-300'
+            }`}
+          >
+            {t(labelKey)}
+            <span className={tab === value ? 'text-blue-100' : 'text-gray-400'}>
+              {' '}
+              ({tabCount(value)})
+            </span>
+          </button>
         ))}
       </div>
 
@@ -80,7 +121,9 @@ const Users = () => {
                 <tr>
                   <th className="px-6 py-4 font-semibold">{t('admin.users.name')}</th>
                   <th className="px-6 py-4 font-semibold">{t('admin.users.role')}</th>
-                  <th className="px-6 py-4 font-semibold">{t('admin.users.status')}</th>
+                  {showStatus && (
+                    <th className="px-6 py-4 font-semibold">{t('admin.users.status')}</th>
+                  )}
                   <th className="px-6 py-4 font-semibold">{t('admin.users.location')}</th>
                   <th className="px-6 py-4 font-semibold">{t('admin.users.joined')}</th>
                 </tr>
@@ -89,18 +132,26 @@ const Users = () => {
                 {filtered.map((p) => (
                   <tr key={p.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
-                      <div className="font-semibold text-gray-900">{p.full_name || t('common.none')}</div>
+                      <div className="font-semibold text-gray-900">
+                        {p.full_name || t('common.none')}
+                      </div>
                       <div className="text-sm text-gray-500">{p.email}</div>
                     </td>
-                    <td className="px-6 py-4 text-gray-700">{t(`profile.roles.${p.role}`)}</td>
-                    <td className="px-6 py-4">
-                      {p.role === 'worker' ? (
-                        <StatusBadge kind="profile" status={p.status} />
-                      ) : (
-                        <span className="text-gray-400 text-sm">{t('common.none')}</span>
-                      )}
+                    <td className="px-6 py-4 text-gray-700">
+                      {t(`profile.roles.${p.role}`)}
                     </td>
-                    <td className="px-6 py-4 text-gray-700">{p.location || t('common.none')}</td>
+                    {showStatus && (
+                      <td className="px-6 py-4">
+                        {p.role === 'worker' ? (
+                          <StatusBadge kind="profile" status={p.status} />
+                        ) : (
+                          <span className="text-gray-400 text-sm">{t('common.none')}</span>
+                        )}
+                      </td>
+                    )}
+                    <td className="px-6 py-4 text-gray-700">
+                      {p.location || t('common.none')}
+                    </td>
                     <td className="px-6 py-4 text-gray-500 text-sm">
                       {new Date(p.created_at).toLocaleDateString()}
                     </td>
@@ -108,8 +159,11 @@ const Users = () => {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan={5} className="px-6 py-12 text-center text-gray-500">
-                      {t('admin.users.noMatch')}
+                    <td
+                      colSpan={showStatus ? 5 : 4}
+                      className="px-6 py-12 text-center text-gray-500"
+                    >
+                      {query ? t('admin.users.noMatch') : t('admin.users.noneInTab')}
                     </td>
                   </tr>
                 )}

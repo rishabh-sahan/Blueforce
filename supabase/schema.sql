@@ -175,6 +175,13 @@ returns trigger language plpgsql security definer set search_path = public as $f
 declare
   chosen_role text;
 begin
+  -- OAuth sign-ups (Google) carry no role: the provider owns that metadata, and
+  -- there is no way to inject one before the account exists. The app creates the
+  -- profile right after the redirect, using the role picked beforehand.
+  if coalesce(new.raw_app_meta_data->>'provider', 'email') <> 'email' then
+    return new;
+  end if;
+
   chosen_role := case
     when new.raw_user_meta_data->>'role' in ('worker', 'customer')
       then new.raw_user_meta_data->>'role'
@@ -291,6 +298,43 @@ drop policy if exists "admins delete bookings" on public.bookings;
 create policy "admins delete bookings"
   on public.bookings for delete to authenticated
   using (public.is_admin());
+
+-- ------------------------------------------------- worker / customer views
+-- Workers and customers share one physical table: bookings reference a single
+-- profiles.user_id, and the role guards are written against it. These views
+-- split them for reading, so each appears separately in the Table Editor and
+-- can be queried on its own.
+--
+-- security_invoker = on is essential. Without it a view runs as its owner and
+-- bypasses row level security, which would expose every profile - customers and
+-- unapproved workers included - to anonymous callers.
+
+create or replace view public.workers
+with (security_invoker = on) as
+select
+  id, user_id, full_name, email, mobile, location, profile_photo,
+  category, experience_years, hourly_rate, skills, bio, rating,
+  status, rejection_reason, verified_at, verified_by,
+  created_at, updated_at
+from public.profiles
+where role = 'worker';
+
+-- Deliberately omits the ten worker-only columns; they mean nothing here.
+create or replace view public.customers
+with (security_invoker = on) as
+select
+  id, user_id, full_name, email, mobile, location, profile_photo,
+  created_at, updated_at
+from public.profiles
+where role = 'customer';
+
+comment on view public.workers is
+  'Worker profiles only. Reading view - writes still go to public.profiles. RLS from profiles applies.';
+comment on view public.customers is
+  'Customer profiles only, without worker-specific columns. Reading view - writes still go to public.profiles.';
+
+grant select on public.workers   to anon, authenticated;
+grant select on public.customers to anon, authenticated;
 
 -- --------------------------------------------------------- creating an admin
 -- Register normally through the app first, then promote that account:

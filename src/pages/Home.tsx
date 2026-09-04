@@ -128,15 +128,15 @@ const Home = () => {
             subtitle={t('home.hero.subtitle')}
             images={[
               {
-                src: "https://miro.medium.com/v2/resize:fit:1400/0*k6-msqB4P6Ik1G2B",
+                src: "https://images.unsplash.com/photo-1516216628859-9bccecab13ca?w=1600&q=80&auto=format&fit=crop",
                 alt: t('home.slider.alt1')
               },
               {
-                src: "https://i.pinimg.com/736x/be/ba/6e/beba6e3905c7f21b71743861e8560b51.jpg",
+                src: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&auto=format&fit=crop",
                 alt: t('home.slider.alt2')
               },
               {
-                src: "https://i.pinimg.com/736x/e3/d7/2e/e3d72e9d7756d73afa3de65c8823db88.jpg",
+                src: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=1600&q=80&auto=format&fit=crop",
                 alt: t('home.slider.alt3')
               }
             ]}

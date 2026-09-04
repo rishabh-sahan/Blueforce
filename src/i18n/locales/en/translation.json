@@ -180,31 +180,85 @@
     "features": {
       "title": "Exclusive Features",
       "subtitle": "Discover what makes BlueForce the leading platform for blue-collar work",
-      "matching": { "title": "Smart Matching", "body": "Filter by trade, city and experience to find the right person" },
-      "multilingual": { "title": "Multilingual Interface", "body": "Use the platform in English, Hindi or Kannada" },
-      "inclusivity": { "title": "Inclusivity", "body": "A platform designed for everyone, regardless of background or skill level" },
-      "freedom": { "title": "Freedom for Workers", "body": "Workers choose their jobs, set their rates and control their schedules" },
-      "verification": { "title": "Admin Verification", "body": "Every worker is checked and approved before they appear in search" },
-      "location": { "title": "Location Based", "body": "Find workers who can actually reach you" },
-      "appointments": { "title": "Appointment Booking", "body": "Pick a date and time; the worker confirms before anything is fixed" },
-      "profiles": { "title": "Detailed Profiles", "body": "Experience, skills and hourly rate on every profile" },
-      "transparent": { "title": "Transparent Rates", "body": "Hourly rates shown up front, with no hidden charges" },
-      "insurance": { "title": "Micro Insurance", "body": "Affordable micro insurance options for workers and their families" },
-      "availability": { "title": "Quick Turnaround", "body": "Requests reach the worker immediately" },
-      "reviews": { "title": "Ratings & Reviews", "body": "Make informed decisions based on past work" }
+      "matching": {
+        "title": "Smart Matching",
+        "body": "Filter by trade, city and experience to find the right person"
+      },
+      "multilingual": {
+        "title": "Multilingual Interface",
+        "body": "Use the platform in English, Hindi or Kannada"
+      },
+      "inclusivity": {
+        "title": "Inclusivity",
+        "body": "A platform designed for everyone, regardless of background or skill level"
+      },
+      "freedom": {
+        "title": "Freedom for Workers",
+        "body": "Workers choose their jobs, set their rates and control their schedules"
+      },
+      "verification": {
+        "title": "Admin Verification",
+        "body": "Every worker is checked and approved before they appear in search"
+      },
+      "location": {
+        "title": "Location Based",
+        "body": "Find workers who can actually reach you"
+      },
+      "appointments": {
+        "title": "Appointment Booking",
+        "body": "Pick a date and time; the worker confirms before anything is fixed"
+      },
+      "profiles": {
+        "title": "Detailed Profiles",
+        "body": "Experience, skills and hourly rate on every profile"
+      },
+      "transparent": {
+        "title": "Transparent Rates",
+        "body": "Hourly rates shown up front, with no hidden charges"
+      },
+      "insurance": {
+        "title": "Micro Insurance",
+        "body": "Affordable micro insurance options for workers and their families"
+      },
+      "availability": {
+        "title": "Quick Turnaround",
+        "body": "Requests reach the worker immediately"
+      },
+      "reviews": {
+        "title": "Ratings & Reviews",
+        "body": "Make informed decisions based on past work"
+      }
     },
     "testimonials": {
       "title": "What Our Users Say",
-      "t1": { "role": "Electrician", "text": "BlueForce helped me find regular work in my area. My income has increased by 35% and I now have steady customers." },
-      "t2": { "role": "Homeowner", "text": "Finding a reliable electrician used to be guesswork. Knowing every worker is verified gives me real confidence." },
-      "t3": { "role": "Plumber", "text": "My profile shows my experience and rate clearly, so customers book me knowing exactly what to expect." },
-      "t4": { "role": "Restaurant Owner", "text": "Our cook left suddenly and BlueForce connected us with a verified replacement within hours." },
-      "t5": { "role": "Carpenter", "text": "I can accept the jobs that suit my schedule and decline the ones that do not. That freedom matters." },
-      "t6": { "role": "Property Manager", "text": "Managing a residential complex needs quick maintenance. BlueForce is our go-to for verified workers." }
+      "t1": {
+        "role": "Electrician",
+        "text": "BlueForce helped me find regular work in my area. My income has increased by 35% and I now have steady customers."
+      },
+      "t2": {
+        "role": "Homeowner",
+        "text": "Finding a reliable electrician used to be guesswork. Knowing every worker is verified gives me real confidence."
+      },
+      "t3": {
+        "role": "Plumber",
+        "text": "My profile shows my experience and rate clearly, so customers book me knowing exactly what to expect."
+      },
+      "t4": {
+        "role": "Restaurant Owner",
+        "text": "Our cook left suddenly and BlueForce connected us with a verified replacement within hours."
+      },
+      "t5": {
+        "role": "Carpenter",
+        "text": "I can accept the jobs that suit my schedule and decline the ones that do not. That freedom matters."
+      },
+      "t6": {
+        "role": "Property Manager",
+        "text": "Managing a residential complex needs quick maintenance. BlueForce is our go-to for verified workers."
+      }
     },
     "slider": {
       "alt1": "Group of blue-collar workers in hard hats",
-      "alt2": "Skilled blue-collar professionals standing together with their tools",
+      "alt2": "Construction workers on a building site",
       "alt3": "Electrician working on wiring",
       "previous": "Previous image",
       "next": "Next image",
@@ -219,17 +273,38 @@
     "missionBody2": "Workers keep control of their own rates and schedule. Customers get someone whose credentials have actually been checked. That's the whole idea.",
     "valuesTitle": "What we stand for",
     "values": {
-      "trust": { "title": "Trust first", "body": "Every worker passes an admin review before a customer can book them. Verification is not optional." },
-      "dignity": { "title": "Dignity of work", "body": "Skilled trades deserve proper profiles, clear rates and direct bookings — not middlemen taking a cut." },
-      "everyone": { "title": "Built for everyone", "body": "Available in English, Hindi and Kannada, and designed to be usable on a basic phone." },
-      "simple": { "title": "Straightforward", "body": "Search, request, confirm. No job auctions, no bidding wars, no hidden charges." }
+      "trust": {
+        "title": "Trust first",
+        "body": "Every worker passes an admin review before a customer can book them. Verification is not optional."
+      },
+      "dignity": {
+        "title": "Dignity of work",
+        "body": "Skilled trades deserve proper profiles, clear rates and direct bookings — not middlemen taking a cut."
+      },
+      "everyone": {
+        "title": "Built for everyone",
+        "body": "Available in English, Hindi and Kannada, and designed to be usable on a basic phone."
+      },
+      "simple": {
+        "title": "Straightforward",
+        "body": "Search, request, confirm. No job auctions, no bidding wars, no hidden charges."
+      }
     },
     "rolesTitle": "How the platform is run",
     "rolesSubtitle": "Three roles, one straightforward flow.",
     "roles": {
-      "workers": { "title": "Workers", "body": "Register under a trade, complete a profile, and receive appointment requests once verified." },
-      "admins": { "title": "Admins", "body": "Review each worker registration and approve or reject it. Nothing goes live without this step." },
-      "customers": { "title": "Customers", "body": "Browse approved workers, compare rates and experience, then request an appointment." }
+      "workers": {
+        "title": "Workers",
+        "body": "Register under a trade, complete a profile, and receive appointment requests once verified."
+      },
+      "admins": {
+        "title": "Admins",
+        "body": "Review each worker registration and approve or reject it. Nothing goes live without this step."
+      },
+      "customers": {
+        "title": "Customers",
+        "body": "Browse approved workers, compare rates and experience, then request an appointment."
+      }
     },
     "ctaTitle": "Join BlueForce",
     "ctaBody": "Whether you are looking for work or looking to hire, it starts with an account.",
@@ -246,12 +321,30 @@
     "promisesTitle": "What you get every time",
     "promisesSubtitle": "The same standards apply to every trade on the platform.",
     "promises": {
-      "verified": { "title": "Admin verified", "body": "Every worker is reviewed and approved by our team before they can be booked." },
-      "appointment": { "title": "Appointment based", "body": "Pick a date and time that suits you. The worker confirms before anything is fixed." },
-      "rates": { "title": "Transparent rates", "body": "Hourly rates are shown up front on every profile. No hidden charges." },
-      "local": { "title": "Local to you", "body": "Filter by city so you only see workers who can actually reach you." },
-      "experience": { "title": "Real experience", "body": "Profiles list years of experience and specific skills, not vague claims." },
-      "quick": { "title": "Quick turnaround", "body": "Requests reach the worker immediately and most are answered the same day." }
+      "verified": {
+        "title": "Admin verified",
+        "body": "Every worker is reviewed and approved by our team before they can be booked."
+      },
+      "appointment": {
+        "title": "Appointment based",
+        "body": "Pick a date and time that suits you. The worker confirms before anything is fixed."
+      },
+      "rates": {
+        "title": "Transparent rates",
+        "body": "Hourly rates are shown up front on every profile. No hidden charges."
+      },
+      "local": {
+        "title": "Local to you",
+        "body": "Filter by city so you only see workers who can actually reach you."
+      },
+      "experience": {
+        "title": "Real experience",
+        "body": "Profiles list years of experience and specific skills, not vague claims."
+      },
+      "quick": {
+        "title": "Quick turnaround",
+        "body": "Requests reach the worker immediately and most are answered the same day."
+      }
     },
     "ctaTitle": "Need one of these today?",
     "ctaBody": "Browse verified workers in your city and request an appointment in minutes.",
@@ -263,23 +356,56 @@
     "tabCustomer": "I need a worker",
     "tabWorker": "I'm a worker",
     "worker": {
-      "step1": { "title": "Register as a worker", "body": "Sign up and pick the trade you work in — electrician, plumber, carpenter and more." },
-      "step2": { "title": "Complete your profile", "body": "Add your experience, hourly rate, skills and city so customers know what you offer." },
-      "step3": { "title": "Get verified", "body": "Our admin team reviews every worker. You appear in search only once approved." },
-      "step4": { "title": "Accept bookings", "body": "Customers send appointment requests. Accept the ones that suit you and get to work." }
+      "step1": {
+        "title": "Register as a worker",
+        "body": "Sign up and pick the trade you work in — electrician, plumber, carpenter and more."
+      },
+      "step2": {
+        "title": "Complete your profile",
+        "body": "Add your experience, hourly rate, skills and city so customers know what you offer."
+      },
+      "step3": {
+        "title": "Get verified",
+        "body": "Our admin team reviews every worker. You appear in search only once approved."
+      },
+      "step4": {
+        "title": "Accept bookings",
+        "body": "Customers send appointment requests. Accept the ones that suit you and get to work."
+      }
     },
     "customer": {
-      "step1": { "title": "Search verified workers", "body": "Filter by trade and city. Everyone you see has already passed our verification." },
-      "step2": { "title": "Compare profiles", "body": "Check experience, hourly rate, skills and ratings before you decide." },
-      "step3": { "title": "Request an appointment", "body": "Choose a date and time, add your address and describe the job." },
-      "step4": { "title": "Get confirmed", "body": "The worker accepts and their contact details unlock. Track it from your dashboard." }
+      "step1": {
+        "title": "Search verified workers",
+        "body": "Filter by trade and city. Everyone you see has already passed our verification."
+      },
+      "step2": {
+        "title": "Compare profiles",
+        "body": "Check experience, hourly rate, skills and ratings before you decide."
+      },
+      "step3": {
+        "title": "Request an appointment",
+        "body": "Choose a date and time, add your address and describe the job."
+      },
+      "step4": {
+        "title": "Get confirmed",
+        "body": "The worker accepts and their contact details unlock. Track it from your dashboard."
+      }
     },
     "verifyTitle": "Why every worker is verified",
     "verifySubtitle": "No worker reaches a customer without passing an admin review first.",
     "verify": {
-      "submitted": { "title": "Details submitted", "body": "The worker provides their trade, experience, rate and contact details." },
-      "review": { "title": "Admin review", "body": "Our team checks the submission and approves or sends it back with a reason." },
-      "live": { "title": "Live and bookable", "body": "Approved workers appear in search results and can receive appointments." }
+      "submitted": {
+        "title": "Details submitted",
+        "body": "The worker provides their trade, experience, rate and contact details."
+      },
+      "review": {
+        "title": "Admin review",
+        "body": "Our team checks the submission and approves or sends it back with a reason."
+      },
+      "live": {
+        "title": "Live and bookable",
+        "body": "Approved workers appear in search results and can receive appointments."
+      }
     },
     "ctaTitle": "Ready to get started?",
     "ctaBody": "Book a verified worker today, or join BlueForce and start receiving work.",
@@ -328,7 +454,9 @@
       "email": "Email",
       "password": "Password",
       "newHere": "New here?",
-      "createAccount": "Create an account"
+      "createAccount": "Create an account",
+      "roleQuestion": "Signing in with Google for the first time?",
+      "roleNote": "Only applies to a new account — if you already have one, you keep your existing role."
     },
     "register": {
       "title": "Create your account",
@@ -349,6 +477,13 @@
       "goToSignIn": "Go to sign in",
       "already": "Already registered?",
       "signIn": "Sign in"
+    },
+    "google": {
+      "divider": "or",
+      "continue": "Continue with Google",
+      "redirecting": "Redirecting to Google…",
+      "completing": "Completing sign in",
+      "workerNote": "You will be asked for your trade and rate after signing in."
     }
   },
   "onboarding": {
@@ -412,7 +547,11 @@
     "bio": "About you",
     "statusNote": "Changing your trade or rate does not affect your verified status.",
     "saved": "Profile saved.",
-    "roles": { "worker": "Worker", "customer": "Customer", "admin": "Admin" }
+    "roles": {
+      "worker": "Worker",
+      "customer": "Customer",
+      "admin": "Admin"
+    }
   },
   "admin": {
     "login": {
@@ -460,7 +599,11 @@
       "status": "Status",
       "location": "Location",
       "joined": "Joined",
-      "noMatch": "No users match that search."
+      "noMatch": "No users match that search.",
+      "tabAll": "All",
+      "tabWorkers": "Workers",
+      "tabCustomers": "Customers",
+      "noneInTab": "Nobody in this group yet."
     },
     "bookings": {
       "title": "Bookings",

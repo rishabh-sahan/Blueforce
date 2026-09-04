@@ -18,6 +18,7 @@ import Onboarding from './pages/Onboarding';
 
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import AuthCallback from './pages/auth/AuthCallback';
 import Dashboard from './pages/dashboard/Dashboard';
 import Profile from './pages/profile/Profile';
 
@@ -55,6 +56,7 @@ function App() {
               <Route path="/workers/:id" element={<WorkerDetail />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
 
               {/* Signed in */}
               <Route path="/onboarding" element={<Onboarding />} />

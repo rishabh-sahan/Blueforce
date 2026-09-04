@@ -26,6 +26,32 @@ export const getProfile = async (userId: string): Promise<Profile | null> => {
   return data;
 };
 
+/**
+ * Creates the caller's own profile row. Only reached for OAuth sign-ups - email
+ * sign-ups get their row from the `on_auth_user_created` trigger, which cannot
+ * know the role for OAuth.
+ *
+ * Role and status are re-derived by a database trigger, so a tampered client
+ * cannot create an approved worker or an admin here.
+ */
+export const createProfile = async (
+  userId: string,
+  values: {
+    role: 'worker' | 'customer';
+    full_name: string;
+    email?: string | null;
+    profile_photo?: string | null;
+  },
+): Promise<Profile> => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .insert({ user_id: userId, ...values })
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+};
+
 export const updateProfile = async (
   userId: string,
   changes: ProfileUpdate,

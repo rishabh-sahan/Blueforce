@@ -13,8 +13,8 @@ import {
   Section,
   Select,
   Spinner,
-  useCategoryName,
 } from '../components/ui';
+import { useCategoryName } from '../components/ui/labels';
 import { stagger } from '../lib/motion';
 import type { Profile, WorkerCategory } from '../types/database';
 

@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import { Alert, Button, Field, Input } from '../../components/ui';
+import GoogleButton from '../../components/GoogleButton';
+import RoleToggle, { type SignupRole } from '../../components/RoleToggle';
 import { EASE } from '../../lib/motion';
 
 const Login = () => {
@@ -13,6 +15,9 @@ const Login = () => {
   const { login, loading, error, clearError } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // Only consulted when Google sign-in creates a brand new account; an existing
+  // account keeps whatever role it already holds.
+  const [role, setRole] = useState<SignupRole>('customer');
 
   const from = (location.state as { from?: string } | null)?.from;
 
@@ -69,6 +74,17 @@ const Login = () => {
             {loading ? t('common.signingIn') : t('common.signIn')}
           </Button>
         </form>
+
+        <div className="mt-6 space-y-5">
+          <RoleToggle
+            compact
+            value={role}
+            onChange={setRole}
+            legend={t('auth.login.roleQuestion')}
+            note={t('auth.login.roleNote')}
+          />
+          <GoogleButton role={role} />
+        </div>
 
         <p className="text-center text-gray-600 mt-6">
           {t('auth.login.newHere')}{' '}

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { MapPin, Phone } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import { listCategories, listProfilesByStatus, setWorkerStatus } from '../../services/profiles';
 import {
   Alert,
@@ -12,8 +12,8 @@ import {
   Input,
   Spinner,
   StatusBadge,
-  useCategoryName,
 } from '../../components/ui';
+import { useCategoryName } from '../../components/ui/labels';
 import { stagger } from '../../lib/motion';
 import type { Profile, ProfileStatus, WorkerCategory } from '../../types/database';
 

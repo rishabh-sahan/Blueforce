@@ -4,7 +4,7 @@ import { BadgeCheck, MapPin, Star } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getWorkerById, listCategories } from '../services/profiles';
 import { createBooking } from '../services/bookings';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import {
   Alert,
   Button,
@@ -14,8 +14,8 @@ import {
   Section,
   Spinner,
   Textarea,
-  useCategoryName,
 } from '../components/ui';
+import { useCategoryName } from '../components/ui/labels';
 import type { Profile, WorkerCategory } from '../types/database';
 
 const WorkerDetail = () => {
