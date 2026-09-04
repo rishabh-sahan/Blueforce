@@ -1,14 +1,16 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { BadgeCheck, CalendarRange, LogOut, ShieldCheck, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 
 const LINKS = [
-  { to: '/admin/verification', label: 'Verification', icon: BadgeCheck },
-  { to: '/admin/users', label: 'Users', icon: Users },
-  { to: '/admin/bookings', label: 'Bookings', icon: CalendarRange },
+  { to: '/admin/verification', labelKey: 'admin.nav.verification', icon: BadgeCheck },
+  { to: '/admin/users', labelKey: 'admin.nav.users', icon: Users },
+  { to: '/admin/bookings', labelKey: 'admin.nav.bookings', icon: CalendarRange },
 ];
 
 const AdminLayout = () => {
+  const { t } = useTranslation();
   const { profile, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -28,13 +30,13 @@ const AdminLayout = () => {
                   <ShieldCheck className="w-5 h-5 text-blue-600" />
                 </div>
                 <div className="min-w-0">
-                  <p className="font-bold text-gray-900 leading-tight">Admin</p>
+                  <p className="font-bold text-gray-900 leading-tight">{t('admin.nav.admin')}</p>
                   <p className="text-xs text-gray-500 truncate">{profile?.email}</p>
                 </div>
               </div>
 
               <nav className="space-y-1">
-                {LINKS.map(({ to, label, icon: Icon }) => (
+                {LINKS.map(({ to, labelKey, icon: Icon }) => (
                   <NavLink
                     key={to}
                     to={to}
@@ -47,7 +49,7 @@ const AdminLayout = () => {
                     }
                   >
                     <Icon className="w-5 h-5" />
-                    {label}
+                    {t(labelKey)}
                   </NavLink>
                 ))}
               </nav>
@@ -57,7 +59,7 @@ const AdminLayout = () => {
                 className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors w-full mt-6"
               >
                 <LogOut className="w-5 h-5" />
-                Sign out
+                {t('common.signOut')}
               </button>
             </div>
           </aside>

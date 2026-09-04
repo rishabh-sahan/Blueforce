@@ -1,70 +1,22 @@
 import { animate, motion, useMotionValue } from 'framer-motion';
 import type { AnimationPlaybackControls } from 'framer-motion';
 import { useEffect, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
-interface Testimonial {
-  name: string;
-  role: string;
-  initials: string;
-  imageSrc?: string;
-  text: string;
-  rating: number;
-}
-
-const testimonials: Testimonial[] = [
-  {
-    name: 'Rahul Sharma',
-    role: 'Electrician',
-    initials: 'RS',
-    imageSrc: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    text: 'BlueForce helped me find regular work in my area. My income has increased by 35% and I now have consistent clients.',
-    rating: 5
-  },
-  {
-    name: 'Priya Patel',
-    role: 'HR Manager',
-    initials: 'PP',
-    imageSrc: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    text: 'Finding reliable skilled workers was always challenging for our company until we discovered BlueForce. The verification process gives us confidence.',
-    rating: 5
-  },
-  {
-    name: 'Vikram Singh',
-    role: 'Plumber',
-    initials: 'VS',
-    imageSrc: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    text: 'The skill video feature lets me showcase my work quality. Clients hire me with confidence after seeing my previous installations.',
-    rating: 4
-  },
-  {
-    name: 'Meera Reddy',
-    role: 'Restaurant Owner',
-    initials: 'MR',
-    imageSrc: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    text: 'Our restaurant needed urgent help when our cook left suddenly. BlueForce connected us with a verified chef within hours!',
-    rating: 5
-  },
-  {
-    name: 'Arjun Kapoor',
-    role: 'Carpenter',
-    initials: 'AK',
-    imageSrc: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    text: 'The in-app chat makes communication with clients clear and easy. I can discuss project details before accepting the work.',
-    rating: 5
-  },
-  {
-    name: 'Ananya Gupta',
-    role: 'Property Manager',
-    initials: 'AG',
-    imageSrc: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3',
-    text: 'Managing a residential complex requires quick maintenance solutions. BlueForce has become our go-to platform for all skilled worker needs.',
-    rating: 4
-  }
+/** Names and photos are fixed; role and quote come from the translations. */
+const TESTIMONIALS = [
+  { key: 't1', initials: 'RS', name: 'Rahul Sharma', imageSrc: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3', rating: 5 },
+  { key: 't2', initials: 'PP', name: 'Priya Patel', imageSrc: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3', rating: 5 },
+  { key: 't3', initials: 'VS', name: 'Vikram Singh', imageSrc: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3', rating: 4 },
+  { key: 't4', initials: 'MR', name: 'Meera Reddy', imageSrc: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3', rating: 5 },
+  { key: 't5', initials: 'AK', name: 'Arjun Kapoor', imageSrc: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3', rating: 5 },
+  { key: 't6', initials: 'AG', name: 'Ananya Gupta', imageSrc: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3', rating: 4 },
 ];
 
 const SCROLL_SPEED = 60; // pixels per second
 
 const TestimonialScroll = () => {
+  const { t } = useTranslation();
   const x = useMotionValue(0);
   const [width, setWidth] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -118,13 +70,13 @@ const TestimonialScroll = () => {
   }, [width, isPaused, x]);
 
   // Create duplicated array for seamless loop
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const duplicated = [...TESTIMONIALS, ...TESTIMONIALS];
 
   return (
     <section className="py-16 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">
-          What Our Users Say
+          {t('home.testimonials.title')}
         </h2>
         <div 
           className="relative overflow-hidden"
@@ -136,10 +88,10 @@ const TestimonialScroll = () => {
             className="flex gap-6"
             style={{ x }}
           >
-            {duplicatedTestimonials.map((testimonial, index) => (
+            {duplicated.map((testimonial, index) => (
               <motion.div
                 key={index}
-                aria-hidden={index >= testimonials.length}
+                aria-hidden={index >= TESTIMONIALS.length}
                 className="flex-shrink-0 w-[300px] bg-white p-6 rounded-lg shadow-md"
                 whileHover={{ 
                   scale: 1.05,
@@ -160,7 +112,7 @@ const TestimonialScroll = () => {
                   )}
                   <div>
                     <h4 className="font-semibold">{testimonial.name}</h4>
-                    <p className="text-gray-500">{testimonial.role}</p>
+                    <p className="text-gray-500">{t(`home.testimonials.${testimonial.key}.role`)}</p>
                   </div>
                 </div>
                 <div className="flex mb-3">
@@ -175,7 +127,7 @@ const TestimonialScroll = () => {
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-600">{testimonial.text}</p>
+                <p className="text-gray-600">{t(`home.testimonials.${testimonial.key}.text`)}</p>
               </motion.div>
             ))}
           </motion.div>

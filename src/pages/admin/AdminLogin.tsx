@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { ShieldCheck } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Alert, Button, Field, Input } from '../../components/ui';
@@ -13,6 +14,7 @@ import { EASE } from '../../lib/motion';
  * would not stop anyone from calling the API directly.
  */
 const AdminLogin = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { login, logout, profile, session, loading, error, clearError } = useAuth();
   const [email, setEmail] = useState('');
@@ -47,23 +49,23 @@ const AdminLogin = () => {
         <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mb-6">
           <ShieldCheck className="w-7 h-7 text-blue-600" />
         </div>
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin sign in</h1>
-        <p className="text-gray-600 mb-8">Restricted to BlueForce staff accounts.</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('admin.login.title')}</h1>
+        <p className="text-gray-600 mb-8">{t('admin.login.subtitle')}</p>
 
         {denied ? (
           <div className="space-y-4">
             <Alert>
-              This account does not have admin access.
+              {t('admin.login.denied')}
             </Alert>
             <Button variant="secondary" className="w-full" onClick={logout}>
-              Sign in with another account
+              {t('admin.login.otherAccount')}
             </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-5">
             {error && <Alert>{error}</Alert>}
 
-            <Field label="Email">
+            <Field label={t('auth.login.email')}>
               <Input
                 type="email"
                 value={email}
@@ -73,7 +75,7 @@ const AdminLogin = () => {
               />
             </Field>
 
-            <Field label="Password">
+            <Field label={t('auth.login.password')}>
               <Input
                 type="password"
                 value={password}
@@ -84,7 +86,7 @@ const AdminLogin = () => {
             </Field>
 
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? 'Signing in…' : 'Sign in'}
+              {loading ? t('common.signingIn') : t('common.signIn')}
             </Button>
           </form>
         )}

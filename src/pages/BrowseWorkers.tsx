@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { BadgeCheck, MapPin, Search, Star } from 'lucide-react';
 import { listApprovedWorkers, listCategories } from '../services/profiles';
 import {
@@ -12,11 +13,14 @@ import {
   Section,
   Select,
   Spinner,
+  useCategoryName,
 } from '../components/ui';
 import { stagger } from '../lib/motion';
 import type { Profile, WorkerCategory } from '../types/database';
 
 const BrowseWorkers = () => {
+  const { t } = useTranslation();
+  const categoryName = useCategoryName();
   const [workers, setWorkers] = useState<Profile[]>([]);
   const [categories, setCategories] = useState<WorkerCategory[]>([]);
   const [loading, setLoading] = useState(true);
@@ -52,16 +56,11 @@ const BrowseWorkers = () => {
     };
   }, [category, location, search]);
 
-  const categoryName = useMemo(
-    () => Object.fromEntries(categories.map((c) => [c.slug, c.name])),
-    [categories],
-  );
-
   return (
     <>
       <PageHero
-        title="Find a verified worker"
-        subtitle="Every worker listed here has been checked and approved by our team."
+        title={t('workers.title')}
+        subtitle={t('workers.subtitle')}
       />
 
       <Section>
@@ -70,36 +69,36 @@ const BrowseWorkers = () => {
             <Search className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" />
             <Input
               className="pl-11"
-              placeholder="Search by name"
+              placeholder={t('workers.searchPlaceholder')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
           <Select value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option value="">All trades</option>
+            <option value="">{t('workers.allTrades')}</option>
             {categories.map((c) => (
               <option key={c.slug} value={c.slug}>
-                {c.name}
+                {categoryName(c.slug, c.name)}
               </option>
             ))}
           </Select>
           <Input
-            placeholder="City"
+            placeholder={t('workers.cityPlaceholder')}
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
 
         {error && (
-          <p className="text-center text-red-600 mb-8">Could not load workers: {error}</p>
+          <p className="text-center text-red-600 mb-8">{t('workers.loadError')}: {error}</p>
         )}
 
         {loading ? (
-          <Spinner label="Finding workers" />
+          <Spinner label={t('workers.finding')} />
         ) : workers.length === 0 ? (
           <EmptyState
-            title="No workers match your search"
-            message="Try a different trade or city. New workers appear here as soon as our team verifies them."
+            title={t('workers.emptyTitle')}
+            message={t('workers.emptyBody')}
           />
         ) : (
           <motion.div
@@ -128,7 +127,7 @@ const BrowseWorkers = () => {
                       <BadgeCheck className="w-4 h-4 text-blue-600 shrink-0" />
                     </h3>
                     <p className="text-blue-600 text-sm font-medium">
-                      {worker.category ? categoryName[worker.category] ?? worker.category : 'Worker'}
+                      {worker.category ? categoryName(worker.category) : t('workers.worker')}
                     </p>
                   </div>
                 </div>
@@ -142,20 +141,20 @@ const BrowseWorkers = () => {
                   )}
                   <p className="flex items-center gap-2">
                     <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    {worker.rating > 0 ? worker.rating.toFixed(1) : 'Newly verified'}
+                    {worker.rating > 0 ? worker.rating.toFixed(1) : t('workers.newlyVerified')}
                     {worker.experience_years != null && (
                       <span className="text-gray-400">
-                        · {worker.experience_years} yrs experience
+                        · {worker.experience_years} {t('common.yearsExperience')}
                       </span>
                     )}
                   </p>
                   {worker.hourly_rate != null && (
-                    <p className="font-semibold text-gray-900">₹{worker.hourly_rate}/hour</p>
+                    <p className="font-semibold text-gray-900">₹{worker.hourly_rate}{t('common.perHour')}</p>
                   )}
                 </div>
 
                 <ButtonLink to={`/workers/${worker.id}`} className="w-full">
-                  View &amp; book
+                  {t('workers.viewAndBook')}
                 </ButtonLink>
               </Card>
             ))}
@@ -163,9 +162,9 @@ const BrowseWorkers = () => {
         )}
 
         <p className="text-center text-gray-500 mt-12">
-          Are you a skilled worker?{' '}
+          {t('workers.joinPrompt')}{' '}
           <Link to="/register" className="text-blue-600 font-semibold hover:underline">
-            Join BlueForce
+            {t('workers.joinLink')}
           </Link>
         </p>
       </Section>

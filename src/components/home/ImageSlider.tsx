@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -17,6 +18,7 @@ interface ImageSliderProps {
 const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const ImageSlider = ({ images, title, subtitle, autoplayInterval = 5000 }: ImageSliderProps) => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Depending on currentIndex restarts the timer whenever the slide changes, so
@@ -71,14 +73,14 @@ const ImageSlider = ({ images, title, subtitle, autoplayInterval = 5000 }: Image
           <button 
             onClick={handlePrevious}
             className="absolute top-1/2 left-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
-            aria-label="Previous image"
+            aria-label={t('home.slider.previous')}
           >
             <ChevronLeft size={24} />
           </button>
           <button 
             onClick={handleNext}
             className="absolute top-1/2 right-4 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-colors"
-            aria-label="Next image"
+            aria-label={t('home.slider.next')}
           >
             <ChevronRight size={24} />
           </button>
@@ -95,7 +97,7 @@ const ImageSlider = ({ images, title, subtitle, autoplayInterval = 5000 }: Image
               className={`w-3 h-3 rounded-full transition-colors ${
                 index === currentIndex ? 'bg-white' : 'bg-white/50'
               }`}
-              aria-label={`Go to slide ${index + 1}`}
+              aria-label={t('home.slider.goToSlide', { number: index + 1 })}
             />
           ))}
         </div>

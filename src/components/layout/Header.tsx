@@ -7,11 +7,11 @@ import { useAuth } from '../../contexts/AuthContext';
 import { EASE } from '../../lib/motion';
 
 const NAV = [
-  { to: '/', labelKey: 'header.home', fallback: 'Home' },
-  { to: '/workers', labelKey: 'header.browseWorkers', fallback: 'Find Workers' },
-  { to: '/how-it-works', labelKey: 'header.howItWorks', fallback: 'How It Works' },
-  { to: '/services', labelKey: 'header.services', fallback: 'Services' },
-  { to: '/about-us', labelKey: 'header.aboutUs', fallback: 'About Us' },
+  { to: '/', labelKey: 'header.home' },
+  { to: '/workers', labelKey: 'header.browseWorkers' },
+  { to: '/how-it-works', labelKey: 'header.howItWorks' },
+  { to: '/services', labelKey: 'header.services' },
+  { to: '/about-us', labelKey: 'header.aboutUs' },
 ];
 
 const LANGUAGES = [
@@ -97,9 +97,9 @@ const Header = () => {
           </Link>
 
           <nav className="hidden lg:flex items-center justify-center flex-1 gap-7">
-            {NAV.map(({ to, labelKey, fallback }) => (
+            {NAV.map(({ to, labelKey }) => (
               <NavLink key={to} to={to} end={to === '/'} className={navLinkClass}>
-                {t(labelKey, fallback)}
+                {t(labelKey)}
               </NavLink>
             ))}
           </nav>
@@ -163,7 +163,7 @@ const Header = () => {
                     {(profile.full_name || 'U').slice(0, 2).toUpperCase()}
                   </span>
                   <span className="font-medium max-w-[9rem] truncate">
-                    {profile.full_name || 'Account'}
+                    {profile.full_name || t('common.myProfile')}
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 transition-transform ${userOpen ? 'rotate-180' : ''}`}
@@ -185,7 +185,7 @@ const Header = () => {
                         className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                       >
                         <LayoutDashboard className="w-4 h-4" />
-                        Dashboard
+                        {t('common.dashboard')}
                       </Link>
                       <Link
                         to="/profile"
@@ -193,14 +193,14 @@ const Header = () => {
                         className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                       >
                         <User className="w-4 h-4" />
-                        My profile
+                        {t('common.myProfile')}
                       </Link>
                       <button
                         onClick={handleLogout}
                         className="flex items-center gap-3 px-4 py-3 w-full text-left text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
                       >
                         <LogOut className="w-4 h-4" />
-                        Sign out
+                        {t('common.signOut')}
                       </button>
                     </motion.div>
                   )}
@@ -212,13 +212,13 @@ const Header = () => {
                   to="/login"
                   className="px-5 py-2 rounded-full border-2 border-white/70 hover:bg-white/15 font-medium transition-colors"
                 >
-                  {t('header.login', 'Login')}
+                  {t('header.login')}
                 </Link>
                 <Link
                   to="/register"
                   className="px-5 py-2 rounded-full bg-white text-blue-700 hover:bg-blue-50 font-semibold transition-colors"
                 >
-                  {t('header.register', 'Register')}
+                  {t('header.register')}
                 </Link>
               </div>
             )}
@@ -226,7 +226,7 @@ const Header = () => {
 
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? t('header.closeMenu') : t('header.openMenu')}
             aria-expanded={menuOpen}
             className="lg:hidden p-2"
           >
@@ -245,7 +245,7 @@ const Header = () => {
               className="lg:hidden overflow-hidden"
             >
               <div className="pt-4 pb-2 space-y-1">
-                {NAV.map(({ to, labelKey, fallback }) => (
+                {NAV.map(({ to, labelKey }) => (
                   <NavLink
                     key={to}
                     to={to}
@@ -253,7 +253,7 @@ const Header = () => {
                     onClick={() => setMenuOpen(false)}
                     className="block py-2.5 text-blue-100 hover:text-white font-medium"
                   >
-                    {t(labelKey, fallback)}
+                    {t(labelKey)}
                   </NavLink>
                 ))}
 
@@ -280,17 +280,17 @@ const Header = () => {
                       onClick={() => setMenuOpen(false)}
                       className="block py-2.5 font-medium"
                     >
-                      Dashboard
+                      {t('common.dashboard')}
                     </Link>
                     <Link
                       to="/profile"
                       onClick={() => setMenuOpen(false)}
                       className="block py-2.5 font-medium"
                     >
-                      My profile
+                      {t('common.myProfile')}
                     </Link>
                     <button onClick={handleLogout} className="block py-2.5 font-medium">
-                      Sign out
+                      {t('common.signOut')}
                     </button>
                   </div>
                 ) : (
@@ -300,14 +300,14 @@ const Header = () => {
                       onClick={() => setMenuOpen(false)}
                       className="flex-1 text-center px-5 py-2.5 rounded-full border-2 border-white/70 font-medium"
                     >
-                      Login
+                      {t('header.login')}
                     </Link>
                     <Link
                       to="/register"
                       onClick={() => setMenuOpen(false)}
                       className="flex-1 text-center px-5 py-2.5 rounded-full bg-white text-blue-700 font-semibold"
                     >
-                      Register
+                      {t('header.register')}
                     </Link>
                   </div>
                 )}

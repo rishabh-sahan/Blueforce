@@ -1,11 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { listAllBookings } from '../../services/bookings';
 import { Alert, Card, Spinner, StatusBadge } from '../../components/ui';
-import {
-  BOOKING_STATUS_LABELS,
-  type BookingStatus,
-  type BookingWithParties,
-} from '../../types/database';
+import type { BookingStatus, BookingWithParties } from '../../types/database';
 
 const STATUSES: BookingStatus[] = [
   'pending',
@@ -16,6 +13,7 @@ const STATUSES: BookingStatus[] = [
 ];
 
 const Bookings = () => {
+  const { t } = useTranslation();
   const [bookings, setBookings] = useState<BookingWithParties[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -35,8 +33,8 @@ const Bookings = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Bookings</h1>
-      <p className="text-gray-600 mb-8">Every appointment across the platform.</p>
+      <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('admin.bookings.title')}</h1>
+      <p className="text-gray-600 mb-8">{t('admin.bookings.subtitle')}</p>
 
       <div className="flex flex-wrap gap-2 mb-8">
         {(['all', ...STATUSES] as const).map((s) => (
@@ -49,7 +47,7 @@ const Bookings = () => {
                 : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-300'
             }`}
           >
-            {s === 'all' ? 'All' : BOOKING_STATUS_LABELS[s]}
+            {s === 'all' ? t('admin.bookings.all') : t(`status.booking.${s}`)}
           </button>
         ))}
       </div>
@@ -61,41 +59,41 @@ const Bookings = () => {
       )}
 
       {loading ? (
-        <Spinner label="Loading bookings" />
+        <Spinner label={t('admin.bookings.loading')} />
       ) : (
         <Card className="p-0 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left">
               <thead className="bg-blue-50 text-gray-700 text-sm">
                 <tr>
-                  <th className="px-6 py-4 font-semibold">Customer</th>
-                  <th className="px-6 py-4 font-semibold">Worker</th>
-                  <th className="px-6 py-4 font-semibold">Scheduled</th>
-                  <th className="px-6 py-4 font-semibold">Status</th>
+                  <th className="px-6 py-4 font-semibold">{t('admin.bookings.customer')}</th>
+                  <th className="px-6 py-4 font-semibold">{t('admin.bookings.worker')}</th>
+                  <th className="px-6 py-4 font-semibold">{t('admin.bookings.scheduled')}</th>
+                  <th className="px-6 py-4 font-semibold">{t('admin.bookings.status')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {visible.map((b) => (
                   <tr key={b.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 text-gray-900 font-medium">
-                      {b.customer?.full_name ?? '—'}
+                      {b.customer?.full_name ?? t('common.none')}
                     </td>
                     <td className="px-6 py-4 text-gray-700">
-                      {b.worker?.full_name ?? '—'}
+                      {b.worker?.full_name ?? t('common.none')}
                     </td>
                     <td className="px-6 py-4 text-gray-700 text-sm">
                       {new Date(b.scheduled_for).toLocaleString()}
                       <div className="text-gray-400">{b.address}</div>
                     </td>
                     <td className="px-6 py-4">
-                      <StatusBadge status={b.status} label={BOOKING_STATUS_LABELS[b.status]} />
+                      <StatusBadge status={b.status} />
                     </td>
                   </tr>
                 ))}
                 {visible.length === 0 && (
                   <tr>
                     <td colSpan={4} className="px-6 py-12 text-center text-gray-500">
-                      No bookings to show.
+                      {t('admin.bookings.empty')}
                     </td>
                   </tr>
                 )}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { BadgeCheck, MapPin, Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { getWorkerById, listCategories } from '../services/profiles';
 import { createBooking } from '../services/bookings';
 import { useAuth } from '../contexts/AuthContext';
@@ -13,10 +14,13 @@ import {
   Section,
   Spinner,
   Textarea,
+  useCategoryName,
 } from '../components/ui';
 import type { Profile, WorkerCategory } from '../types/database';
 
 const WorkerDetail = () => {
+  const { t } = useTranslation();
+  const categoryName = useCategoryName();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { session, profile } = useAuth();
@@ -46,22 +50,24 @@ const WorkerDetail = () => {
     };
   }, [id]);
 
-  if (loading) return <Spinner label="Loading worker" />;
+  if (loading) return <Spinner label={t('workers.detail.loading')} />;
   if (!worker) {
     return (
       <Section>
         <p className="text-center text-gray-600">
-          This worker is not available.{' '}
+          {t('workers.detail.unavailable')}{' '}
           <Link to="/workers" className="text-blue-600 font-semibold hover:underline">
-            Browse all workers
+            {t('common.backToWorkers')}
           </Link>
         </p>
       </Section>
     );
   }
 
-  const categoryName =
-    categories.find((c) => c.slug === worker.category)?.name ?? worker.category ?? 'Worker';
+  const tradeName = categoryName(
+    worker.category,
+    categories.find((c) => c.slug === worker.category)?.name,
+  );
 
   const handleBook = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -109,7 +115,7 @@ const WorkerDetail = () => {
                   {worker.full_name}
                   <BadgeCheck className="w-5 h-5 text-blue-600" />
                 </h1>
-                <p className="text-blue-600 font-medium">{categoryName}</p>
+                <p className="text-blue-600 font-medium">{tradeName}</p>
                 {worker.location && (
                   <p className="text-gray-500 text-sm flex items-center gap-1 mt-1">
                     <MapPin className="w-4 h-4" />
@@ -125,19 +131,19 @@ const WorkerDetail = () => {
                   <Star className="w-5 h-5 text-yellow-400 fill-current" />
                   {worker.rating > 0 ? worker.rating.toFixed(1) : '—'}
                 </div>
-                <div className="text-gray-600 text-sm mt-1">Rating</div>
+                <div className="text-gray-600 text-sm mt-1">{t('common.rating')}</div>
               </div>
               <div className="bg-blue-50 rounded-xl p-4 text-center">
                 <div className="text-2xl font-bold text-blue-600">
                   {worker.experience_years ?? '—'}
                 </div>
-                <div className="text-gray-600 text-sm mt-1">Years exp.</div>
+                <div className="text-gray-600 text-sm mt-1">{t('workers.detail.yearsExp')}</div>
               </div>
               <div className="bg-blue-50 rounded-xl p-4 text-center">
                 <div className="text-2xl font-bold text-blue-600">
                   {worker.hourly_rate != null ? `₹${worker.hourly_rate}` : '—'}
                 </div>
-                <div className="text-gray-600 text-sm mt-1">Per hour</div>
+                <div className="text-gray-600 text-sm mt-1">{t('workers.detail.perHour')}</div>
               </div>
             </div>
 
@@ -161,27 +167,27 @@ const WorkerDetail = () => {
         {/* Booking */}
         <div className="lg:col-span-2">
           <Card>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Book an appointment</h2>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">{t('workers.detail.bookTitle')}</h2>
 
             {done ? (
               <div className="space-y-4">
                 <Alert tone="success">
-                  Request sent. {worker.full_name.split(' ')[0]} will confirm shortly - you
-                  can track it from your dashboard.
+                  {t('workers.detail.successTitle')}{' '}
+                  {t('workers.detail.successBody', { name: worker.full_name.split(' ')[0] })}
                 </Alert>
                 <Button className="w-full" onClick={() => navigate('/dashboard')}>
-                  View my bookings
+                  {t('workers.detail.viewBookings')}
                 </Button>
               </div>
             ) : profile?.role === 'worker' ? (
               <Alert tone="info">
-                You are signed in as a worker. Bookings are made from a customer account.
+                {t('workers.detail.workerNotice')}
               </Alert>
             ) : (
               <form onSubmit={handleBook} className="space-y-4">
                 {error && <Alert>{error}</Alert>}
 
-                <Field label="When do you need them?">
+                <Field label={t('workers.detail.when')}>
                   <Input
                     type="datetime-local"
                     required
@@ -192,16 +198,16 @@ const WorkerDetail = () => {
                   />
                 </Field>
 
-                <Field label="Address">
+                <Field label={t('workers.detail.address')}>
                   <Input
                     required
-                    placeholder="Where should they come?"
+                    placeholder={t('workers.detail.addressPlaceholder')}
                     value={form.address}
                     onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
                   />
                 </Field>
 
-                <Field label="What needs doing?" hint="Optional, but it helps them prepare.">
+                <Field label={t('workers.detail.description')} hint={t('workers.detail.descriptionHint')}>
                   <Textarea
                     rows={3}
                     value={form.description}
@@ -212,12 +218,12 @@ const WorkerDetail = () => {
                 </Field>
 
                 <Button type="submit" disabled={submitting} className="w-full">
-                  {submitting ? 'Sending request…' : 'Request appointment'}
+                  {submitting ? t('workers.detail.sending') : t('workers.detail.requestButton')}
                 </Button>
 
                 {!session && (
                   <p className="text-sm text-gray-500 text-center">
-                    You will be asked to sign in first.
+                    {t('workers.detail.signInNote')}
                   </p>
                 )}
               </form>

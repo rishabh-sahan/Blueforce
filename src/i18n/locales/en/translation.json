@@ -1,30 +1,85 @@
 {
+  "common": {
+    "loading": "Loading",
+    "loadingAccount": "Loading your account",
+    "checkingSession": "Checking your session",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "optional": "Optional",
+    "perHour": "/hour",
+    "perHourShort": "/hr",
+    "yearsExperience": "yrs experience",
+    "years": "yrs",
+    "rating": "Rating",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "signOut": "Sign out",
+    "dashboard": "Dashboard",
+    "myProfile": "My profile",
+    "none": "—",
+    "backToWorkers": "Browse all workers"
+  },
+  "status": {
+    "booking": {
+      "pending": "Awaiting worker",
+      "accepted": "Confirmed",
+      "declined": "Declined",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "profile": {
+      "pending": "Pending verification",
+      "approved": "Verified",
+      "rejected": "Rejected"
+    }
+  },
+  "categories": {
+    "electrician": "Electrician",
+    "plumber": "Plumber",
+    "carpenter": "Carpenter",
+    "welder": "Welder",
+    "painter": "Painter",
+    "mason": "Mason",
+    "construction": "Construction Worker",
+    "mechanic": "Mechanic",
+    "driver": "Driver",
+    "gardener": "Gardener",
+    "cook": "Cook",
+    "delivery": "Delivery Executive",
+    "office-boy": "Office Boy",
+    "lift-technician": "Lift Technician"
+  },
   "header": {
     "home": "Home",
-    "aboutUs": "About Us",
-    "services": "Services",
+    "browseWorkers": "Find Workers",
     "howItWorks": "How It Works",
+    "services": "Services",
+    "aboutUs": "About Us",
     "login": "Login",
     "register": "Register",
-    "logout": "Logout",
-    "profile": "Profile",
-    "browseWorkers": "Find Workers"
+    "logout": "Sign out",
+    "profile": "My profile",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "footer": {
+    "tagline": "Empowering blue-collar workers and customers across India.",
+    "quickLinks": "Quick Links",
+    "legal": "Legal",
     "aboutUs": "About Us",
     "contact": "Contact Us",
     "privacy": "Privacy Policy",
     "terms": "Terms & Conditions",
     "faq": "FAQs",
     "careers": "Careers",
-    "quickLinks": "Quick Links",
-    "legal": "Legal",
     "subscribeTitle": "Subscribe to Our Newsletter",
     "emailPlaceholder": "Enter your email",
     "subscribe": "Subscribe",
     "subscribeNote": "Get updates on new jobs and opportunities",
     "copyright": "All rights reserved.",
-    "tagline": "Empowering blue-collar workers and employers across India.",
     "address": "123 Main Street, Bengaluru, India",
     "phone": "+91 98765 43210",
     "email": "info@blueforce.com"
@@ -32,123 +87,391 @@
   "home": {
     "hero": {
       "title": "Connecting Skill. Creating Opportunity.",
-      "subtitle": "India's premier platform for skilled blue-collar workers and employers",
-      "workerBtn": "I'm a Worker",
-      "employerBtn": "I'm an Employer"
+      "subtitle": "India's premier platform for skilled blue-collar workers and customers"
     },
-    "features": {
-      "title": "Features",
-      "matching": "Smart job matching",
-      "location": "Location-based worker search",
-      "chat": "In-app chat",
-      "portfolio": "Skill video portfolio",
-      "badges": "Verified skill badges",
-      "availability": "Real-time availability",
-      "insurance": "Micro insurance",
-      "reviews": "Verified reviews"
+    "cta": {
+      "book": "Book a verified worker",
+      "join": "Register as a worker"
     },
-    "professions": {
-      "title": "Blue-Collar Professions",
-      "electrician": "Electrician",
-      "plumber": "Plumber",
-      "carpenter": "Carpenter",
-      "welder": "Welder",
-      "painter": "Painter",
-      "driver": "Driver",
-      "gardener": "Gardner",
-      "mason": "Mason",
-      "construction": "Construction worker",
-      "officeboy": "Office boy",
-      "mechanic": "Mechanic",
-      "cook": "Cook",
-      "delivery": "Delivery boy",
-      "lift": "Lift technician"
+    "trust": {
+      "titleLead": "Trusted by Thousands for",
+      "titleAccent": "Professional Service",
+      "body": "Our verified technicians deliver reliable, high-quality service with a focus on customer satisfaction and safety. Experience the difference with BlueForce.",
+      "satisfaction": "Satisfaction Rate",
+      "professionals": "Active Professionals",
+      "moreAbout": "More About Us",
+      "howItWorks": "How It Works",
+      "imageAlt": "Professional handshake between engineer and customer"
     },
-    "testimonials": {
-      "title": "Testimonials",
-      "workerTestimonial": "BlueForce helped me find consistent work and improved my earnings by 40%.",
-      "employerTestimonial": "Finding reliable skilled workers was a challenge until we discovered BlueForce."
+    "standOut": {
+      "titleLead": "What Makes",
+      "titleTail": "Stand Out",
+      "body": "We go beyond just connecting workers and customers. BlueForce empowers, protects, and includes everyone in the workforce ecosystem.",
+      "verified": "Verified Professionals",
+      "support": "24/7 Support",
+      "network": "Nationwide Network",
+      "learnMore": "Learn More",
+      "cards": {
+        "verification": {
+          "title": "Admin Verification",
+          "body": "Every worker is reviewed and approved by our team before they can be booked."
+        },
+        "insurance": {
+          "title": "Micro Insurance",
+          "body": "Affordable micro insurance options for workers and their families."
+        },
+        "inclusivity": {
+          "title": "Inclusivity",
+          "body": "A platform designed for everyone, regardless of background or skill level."
+        },
+        "freedom": {
+          "title": "Freedom for Workers",
+          "body": "Workers have the freedom to choose jobs, set their rates, and control their schedules."
+        }
+      }
     },
     "whyUs": {
       "title": "Why BlueForce?",
       "value": "Value",
+      "valueBody": "Fair pricing and a transparent fee structure for everyone.",
       "accessibility": "Accessibility",
+      "accessibilityBody": "Multiple languages and an intuitive design for all users.",
       "trust": "Trust",
-      "empowerment": "Empowerment"
+      "trustBody": "Admin-verified workers and a booking flow built on trust.",
+      "empowerment": "Empowerment",
+      "empowermentBody": "Empowering workers with better opportunities and growth."
     },
     "faq": {
+      "title": "Frequently Asked Questions",
       "q1": "How does BlueForce work?",
-      "a1": "BlueForce connects skilled workers with employers through a simple, secure platform. Workers create profiles, showcase their skills, and get hired for jobs that match their expertise.",
-      "q2": "Is BlueForce free to use?",
-      "a2": "Yes, BlueForce is completely free for workers. Employers pay a small fee only when they successfully hire a worker.",
-      "q3": "How do I get paid?",
-      "a3": "Payments are processed securely through our platform. Workers receive payments directly to their registered bank account after job completion.",
-      "q4": "What types of jobs are available?",
-      "a4": "We offer a wide range of blue-collar jobs including electricians, plumbers, carpenters, welders, painters, drivers, and many more.",
-      "q5": "How do I verify my skills?",
-      "a5": "You can verify your skills by uploading certificates, work samples, and completing skill assessments. This helps build trust with potential employers."
+      "a1": "Workers register under a trade and complete a profile. Our admin team verifies them, and only then can customers find and book them for an appointment.",
+      "q2": "How are workers verified?",
+      "a2": "Every worker submits their trade, experience, rate and contact details. Our team reviews the submission and either approves it or sends it back with a reason.",
+      "q3": "How do I book a worker?",
+      "a3": "Browse verified workers, open a profile, then choose a date, time and address. The worker confirms the request from their dashboard.",
+      "q4": "What does it cost to join?",
+      "a4": "Creating an account is free for both workers and customers. Workers set their own hourly rate, which is shown up front on their profile.",
+      "q5": "Which languages are supported?",
+      "a5": "The whole platform is available in English, Hindi and Kannada. You can switch language at any time from the menu at the top."
+    },
+    "ctaSection": {
+      "title": "Ready to get started?",
+      "body": "Join thousands of workers and customers already using BlueForce to connect, work, and grow.",
+      "button": "Sign Up Now"
+    },
+    "modal": {
+      "title": "Discover BlueForce",
+      "close": "Close",
+      "missionTitle": "Our Mission",
+      "missionBody": "BlueForce is dedicated to revolutionising blue-collar work by connecting skilled professionals with the people who need them.",
+      "benefitsTitle": "Key Benefits",
+      "benefit1": "Verified worker profiles, checked by our admin team",
+      "benefit2": "Flexible scheduling and appointment-based bookings",
+      "benefit3": "Access to a wide network of skilled professionals",
+      "howTitle": "How It Works",
+      "step1Title": "1. Create Profile",
+      "step1Body": "Sign up and create your profile with your trade, skills and experience",
+      "step2Title": "2. Get Verified",
+      "step2Body": "Our admin team reviews your details and approves your profile",
+      "step3Title": "3. Get Booked",
+      "step3Body": "Customers find you and request appointments",
+      "getStarted": "Get Started Now"
+    },
+    "features": {
+      "title": "Exclusive Features",
+      "subtitle": "Discover what makes BlueForce the leading platform for blue-collar work",
+      "matching": { "title": "Smart Matching", "body": "Filter by trade, city and experience to find the right person" },
+      "multilingual": { "title": "Multilingual Interface", "body": "Use the platform in English, Hindi or Kannada" },
+      "inclusivity": { "title": "Inclusivity", "body": "A platform designed for everyone, regardless of background or skill level" },
+      "freedom": { "title": "Freedom for Workers", "body": "Workers choose their jobs, set their rates and control their schedules" },
+      "verification": { "title": "Admin Verification", "body": "Every worker is checked and approved before they appear in search" },
+      "location": { "title": "Location Based", "body": "Find workers who can actually reach you" },
+      "appointments": { "title": "Appointment Booking", "body": "Pick a date and time; the worker confirms before anything is fixed" },
+      "profiles": { "title": "Detailed Profiles", "body": "Experience, skills and hourly rate on every profile" },
+      "transparent": { "title": "Transparent Rates", "body": "Hourly rates shown up front, with no hidden charges" },
+      "insurance": { "title": "Micro Insurance", "body": "Affordable micro insurance options for workers and their families" },
+      "availability": { "title": "Quick Turnaround", "body": "Requests reach the worker immediately" },
+      "reviews": { "title": "Ratings & Reviews", "body": "Make informed decisions based on past work" }
+    },
+    "testimonials": {
+      "title": "What Our Users Say",
+      "t1": { "role": "Electrician", "text": "BlueForce helped me find regular work in my area. My income has increased by 35% and I now have steady customers." },
+      "t2": { "role": "Homeowner", "text": "Finding a reliable electrician used to be guesswork. Knowing every worker is verified gives me real confidence." },
+      "t3": { "role": "Plumber", "text": "My profile shows my experience and rate clearly, so customers book me knowing exactly what to expect." },
+      "t4": { "role": "Restaurant Owner", "text": "Our cook left suddenly and BlueForce connected us with a verified replacement within hours." },
+      "t5": { "role": "Carpenter", "text": "I can accept the jobs that suit my schedule and decline the ones that do not. That freedom matters." },
+      "t6": { "role": "Property Manager", "text": "Managing a residential complex needs quick maintenance. BlueForce is our go-to for verified workers." }
+    },
+    "slider": {
+      "alt1": "Group of blue-collar workers in hard hats",
+      "alt2": "Skilled blue-collar professionals standing together with their tools",
+      "alt3": "Electrician working on wiring",
+      "previous": "Previous image",
+      "next": "Next image",
+      "goToSlide": "Go to slide {{number}}"
+    }
+  },
+  "about": {
+    "title": "About BlueForce",
+    "subtitle": "Connecting India's skilled blue-collar workers with the people who need them.",
+    "missionTitle": "Our mission",
+    "missionBody1": "Skilled workers across India rely on word of mouth to find their next job, while people needing an electrician or a plumber rely on the same. BlueForce replaces that guesswork with verified profiles and direct appointments.",
+    "missionBody2": "Workers keep control of their own rates and schedule. Customers get someone whose credentials have actually been checked. That's the whole idea.",
+    "valuesTitle": "What we stand for",
+    "values": {
+      "trust": { "title": "Trust first", "body": "Every worker passes an admin review before a customer can book them. Verification is not optional." },
+      "dignity": { "title": "Dignity of work", "body": "Skilled trades deserve proper profiles, clear rates and direct bookings — not middlemen taking a cut." },
+      "everyone": { "title": "Built for everyone", "body": "Available in English, Hindi and Kannada, and designed to be usable on a basic phone." },
+      "simple": { "title": "Straightforward", "body": "Search, request, confirm. No job auctions, no bidding wars, no hidden charges." }
+    },
+    "rolesTitle": "How the platform is run",
+    "rolesSubtitle": "Three roles, one straightforward flow.",
+    "roles": {
+      "workers": { "title": "Workers", "body": "Register under a trade, complete a profile, and receive appointment requests once verified." },
+      "admins": { "title": "Admins", "body": "Review each worker registration and approve or reject it. Nothing goes live without this step." },
+      "customers": { "title": "Customers", "body": "Browse approved workers, compare rates and experience, then request an appointment." }
+    },
+    "ctaTitle": "Join BlueForce",
+    "ctaBody": "Whether you are looking for work or looking to hire, it starts with an account.",
+    "ctaCreate": "Create an account",
+    "ctaHow": "See how it works"
+  },
+  "services": {
+    "title": "Services on BlueForce",
+    "subtitle": "Skilled trades you can book, backed by a verification process.",
+    "browse": "Browse verified workers",
+    "tradesTitle": "Trades we cover",
+    "tradesSubtitle": "Book a verified professional in any of these categories.",
+    "loadingTrades": "Loading trades",
+    "promisesTitle": "What you get every time",
+    "promisesSubtitle": "The same standards apply to every trade on the platform.",
+    "promises": {
+      "verified": { "title": "Admin verified", "body": "Every worker is reviewed and approved by our team before they can be booked." },
+      "appointment": { "title": "Appointment based", "body": "Pick a date and time that suits you. The worker confirms before anything is fixed." },
+      "rates": { "title": "Transparent rates", "body": "Hourly rates are shown up front on every profile. No hidden charges." },
+      "local": { "title": "Local to you", "body": "Filter by city so you only see workers who can actually reach you." },
+      "experience": { "title": "Real experience", "body": "Profiles list years of experience and specific skills, not vague claims." },
+      "quick": { "title": "Quick turnaround", "body": "Requests reach the worker immediately and most are answered the same day." }
+    },
+    "ctaTitle": "Need one of these today?",
+    "ctaBody": "Browse verified workers in your city and request an appointment in minutes.",
+    "ctaButton": "Find a worker"
+  },
+  "howItWorks": {
+    "title": "How BlueForce works",
+    "subtitle": "Verified blue-collar workers, booked in a few taps.",
+    "tabCustomer": "I need a worker",
+    "tabWorker": "I'm a worker",
+    "worker": {
+      "step1": { "title": "Register as a worker", "body": "Sign up and pick the trade you work in — electrician, plumber, carpenter and more." },
+      "step2": { "title": "Complete your profile", "body": "Add your experience, hourly rate, skills and city so customers know what you offer." },
+      "step3": { "title": "Get verified", "body": "Our admin team reviews every worker. You appear in search only once approved." },
+      "step4": { "title": "Accept bookings", "body": "Customers send appointment requests. Accept the ones that suit you and get to work." }
+    },
+    "customer": {
+      "step1": { "title": "Search verified workers", "body": "Filter by trade and city. Everyone you see has already passed our verification." },
+      "step2": { "title": "Compare profiles", "body": "Check experience, hourly rate, skills and ratings before you decide." },
+      "step3": { "title": "Request an appointment", "body": "Choose a date and time, add your address and describe the job." },
+      "step4": { "title": "Get confirmed", "body": "The worker accepts and their contact details unlock. Track it from your dashboard." }
+    },
+    "verifyTitle": "Why every worker is verified",
+    "verifySubtitle": "No worker reaches a customer without passing an admin review first.",
+    "verify": {
+      "submitted": { "title": "Details submitted", "body": "The worker provides their trade, experience, rate and contact details." },
+      "review": { "title": "Admin review", "body": "Our team checks the submission and approves or sends it back with a reason." },
+      "live": { "title": "Live and bookable", "body": "Approved workers appear in search results and can receive appointments." }
+    },
+    "ctaTitle": "Ready to get started?",
+    "ctaBody": "Book a verified worker today, or join BlueForce and start receiving work.",
+    "ctaFind": "Find a worker",
+    "ctaJoin": "Register as a worker"
+  },
+  "workers": {
+    "title": "Find a verified worker",
+    "subtitle": "Every worker listed here has been checked and approved by our team.",
+    "searchPlaceholder": "Search by name",
+    "allTrades": "All trades",
+    "cityPlaceholder": "City",
+    "finding": "Finding workers",
+    "loadError": "Could not load workers",
+    "emptyTitle": "No workers match your search",
+    "emptyBody": "Try a different trade or city. New workers appear here as soon as our team verifies them.",
+    "viewAndBook": "View & book",
+    "newlyVerified": "Newly verified",
+    "worker": "Worker",
+    "joinPrompt": "Are you a skilled worker?",
+    "joinLink": "Join BlueForce",
+    "detail": {
+      "loading": "Loading worker",
+      "unavailable": "This worker is not available.",
+      "yearsExp": "Years exp.",
+      "perHour": "Per hour",
+      "bookTitle": "Book an appointment",
+      "when": "When do you need them?",
+      "address": "Address",
+      "addressPlaceholder": "Where should they come?",
+      "description": "What needs doing?",
+      "descriptionHint": "Optional, but it helps them prepare.",
+      "requestButton": "Request appointment",
+      "sending": "Sending request…",
+      "signInNote": "You will be asked to sign in first.",
+      "successTitle": "Request sent.",
+      "successBody": "{{name}} will confirm shortly — you can track it from your dashboard.",
+      "viewBookings": "View my bookings",
+      "workerNotice": "You are signed in as a worker. Bookings are made from a customer account."
     }
   },
   "auth": {
-    "login": "Login",
-    "register": "Register",
-    "email": "Email",
-    "password": "Password",
-    "confirmPassword": "Confirm Password",
-    "forgotPassword": "Forgot Password?",
-    "noAccount": "Don't have an account?",
-    "hasAccount": "Already have an account?",
-    "workerRegister": "Register as Worker",
-    "employerRegister": "Register as Employer"
-  },
-  "howItWorks": {
-    "title": "How It Works",
-    "workerTitle": "For Workers",
-    "employerTitle": "For Employers",
-    "worker": {
-      "step1": "Create your profile",
-      "step2": "Upload skills & certifications",
-      "step3": "Complete verification",
-      "step4": "Set availability & get hired"
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to manage your bookings.",
+      "email": "Email",
+      "password": "Password",
+      "newHere": "New here?",
+      "createAccount": "Create an account"
     },
-    "employer": {
-      "step1": "Create job post",
-      "step2": "Browse qualified workers",
-      "step3": "Chat & hire",
-      "step4": "Pay & review"
+    "register": {
+      "title": "Create your account",
+      "subtitle": "It takes less than a minute.",
+      "roleQuestion": "How will you use BlueForce?",
+      "workerTitle": "I'm a worker",
+      "workerBlurb": "Offer your skills and receive booking requests.",
+      "customerTitle": "I need a worker",
+      "customerBlurb": "Browse verified workers and book an appointment.",
+      "fullName": "Full name",
+      "namePlaceholder": "Ravi Kumar",
+      "email": "Email",
+      "password": "Password",
+      "passwordHint": "At least 6 characters.",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "confirmNotice": "Account created. Confirm your email, then sign in to finish setting up your profile.",
+      "goToSignIn": "Go to sign in",
+      "already": "Already registered?",
+      "signIn": "Sign in"
     }
   },
-  "workerProfile": {
-    "title": "Complete Your Profile",
-    "subtitle": "Showcase your skills and experience to get hired",
-    "personalInfo": "Personal Information",
-    "professionalInfo": "Professional Information",
-    "uploadMedia": "Upload Media",
-    "verificationDocs": "Verification Documents",
-    "fullName": "Full Name",
-    "mobileNumber": "Mobile Number",
-    "currentLocation": "Current Location",
-    "bio": "Bio",
-    "primaryDomain": "Primary Domain",
-    "selectProfession": "Select your profession",
-    "workExperience": "Work Experience (years)",
-    "hourlyRate": "Hourly Rate (₹)",
-    "profilePhoto": "Profile Photo",
-    "uploadPhoto": "Upload Photo",
-    "skillVideos": "Skill Videos",
-    "uploadVideos": "Upload Videos",
-    "skillCertifications": "Skill Certifications",
-    "uploadCertificates": "Upload Certificates",
-    "governmentId": "Government ID",
-    "uploadIdDocuments": "Upload ID Documents",
-    "note": "Note:",
-    "noteText": "Your documents will be securely stored and only used for verification purposes.",
-    "back": "Back",
-    "next": "Next",
-    "submitting": "Submitting...",
-    "submitProfile": "Submit Profile"
+  "onboarding": {
+    "title": "Complete your worker profile",
+    "body": "Our team reviews every worker before they appear in search results. Fill this in accurately so verification is quick.",
+    "fullName": "Full name",
+    "mobile": "Mobile number",
+    "category": "Trade / category",
+    "selectTrade": "Select your trade",
+    "city": "City",
+    "cityPlaceholder": "Bengaluru",
+    "experience": "Years of experience",
+    "rate": "Rate per hour (₹)",
+    "skills": "Skills",
+    "skillsHint": "Comma separated, e.g. Wiring, Maintenance, Repairs",
+    "bio": "About you",
+    "bioHint": "A short introduction customers will read.",
+    "submit": "Submit for verification",
+    "submitting": "Submitting…"
   },
-  "register": {
-    "fullName": "Full Name"
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}",
+    "workerSubtitle": "Appointment requests from customers appear here.",
+    "customerSubtitle": "Track the appointments you have booked.",
+    "verification": "Verification",
+    "pendingBody": "Our team is reviewing your profile. Once approved you will appear in search results and can receive bookings.",
+    "rejectedBody": "Your profile was not approved. Update your details and it will be reviewed again.",
+    "editProfile": "Edit profile",
+    "requestsTitle": "Appointment requests",
+    "bookingsTitle": "My bookings",
+    "bookWorker": "Book a worker",
+    "loadingBookings": "Loading bookings",
+    "emptyWorkerTitle": "No requests yet",
+    "emptyCustomerTitle": "No bookings yet",
+    "emptyWorkerApproved": "Customers can find you in search. New requests will show up here.",
+    "emptyWorkerPending": "Once your profile is verified, customers can find and book you.",
+    "emptyCustomer": "Browse verified workers and request an appointment.",
+    "findWorker": "Find a worker",
+    "customer": "Customer",
+    "worker": "Worker",
+    "accept": "Accept",
+    "decline": "Decline",
+    "markCompleted": "Mark completed",
+    "cancel": "Cancel",
+    "editPrompt": "Need to change your details?",
+    "editLink": "Edit your profile"
+  },
+  "profile": {
+    "title": "Your profile",
+    "subtitle": "Keep your details up to date.",
+    "signedInAs": "Signed in as",
+    "fullName": "Full name",
+    "mobile": "Mobile number",
+    "city": "City",
+    "category": "Trade / category",
+    "selectTrade": "Select your trade",
+    "rate": "Rate per hour (₹)",
+    "experience": "Years of experience",
+    "skills": "Skills",
+    "skillsHint": "Comma separated.",
+    "bio": "About you",
+    "statusNote": "Changing your trade or rate does not affect your verified status.",
+    "saved": "Profile saved.",
+    "roles": { "worker": "Worker", "customer": "Customer", "admin": "Admin" }
+  },
+  "admin": {
+    "login": {
+      "title": "Admin sign in",
+      "subtitle": "Restricted to BlueForce staff accounts.",
+      "denied": "This account does not have admin access.",
+      "otherAccount": "Sign in with another account"
+    },
+    "nav": {
+      "admin": "Admin",
+      "verification": "Verification",
+      "users": "Users",
+      "bookings": "Bookings"
+    },
+    "verification": {
+      "title": "Worker verification",
+      "subtitle": "Approve a worker to make them visible and bookable. Rejected workers can fix their details and be reviewed again.",
+      "tabPending": "Awaiting review",
+      "tabApproved": "Approved",
+      "tabRejected": "Rejected",
+      "loading": "Loading workers",
+      "emptyPendingTitle": "Nothing to review",
+      "emptyPendingBody": "New worker registrations will appear here for approval.",
+      "emptyOtherTitle": "No workers here",
+      "emptyOtherBody": "Workers you have actioned will be listed here.",
+      "trade": "Trade",
+      "experience": "Experience",
+      "rate": "Rate",
+      "registered": "Registered",
+      "approve": "Approve worker",
+      "reject": "Reject",
+      "reasonPlaceholder": "Reason for rejection",
+      "reasonLabel": "Reason"
+    },
+    "users": {
+      "title": "Users",
+      "subtitle": "Everyone registered on BlueForce.",
+      "workers": "Workers",
+      "customers": "Customers",
+      "awaiting": "Awaiting review",
+      "searchPlaceholder": "Search by name, email or role",
+      "loading": "Loading users",
+      "name": "Name",
+      "role": "Role",
+      "status": "Status",
+      "location": "Location",
+      "joined": "Joined",
+      "noMatch": "No users match that search."
+    },
+    "bookings": {
+      "title": "Bookings",
+      "subtitle": "Every appointment across the platform.",
+      "all": "All",
+      "loading": "Loading bookings",
+      "customer": "Customer",
+      "worker": "Worker",
+      "scheduled": "Scheduled",
+      "status": "Status",
+      "empty": "No bookings to show."
+    }
   }
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { HardHat, UserRound } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Alert, Button, Field, Input } from '../../components/ui';
@@ -8,22 +9,13 @@ import { EASE } from '../../lib/motion';
 
 type SignupRole = 'worker' | 'customer';
 
-const ROLES: { value: SignupRole; title: string; blurb: string; icon: typeof HardHat }[] = [
-  {
-    value: 'worker',
-    title: "I'm a worker",
-    blurb: 'Offer your skills and receive booking requests.',
-    icon: HardHat,
-  },
-  {
-    value: 'customer',
-    title: 'I need a worker',
-    blurb: 'Browse verified workers and book an appointment.',
-    icon: UserRound,
-  },
+const ROLES: { value: SignupRole; icon: typeof HardHat }[] = [
+  { value: 'worker', icon: HardHat },
+  { value: 'customer', icon: UserRound },
 ];
 
 const Register = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { register, loading, error, clearError } = useAuth();
   const [role, setRole] = useState<SignupRole>('customer');
@@ -38,9 +30,7 @@ const Register = () => {
     try {
       const { needsEmailConfirmation } = await register(email, password, role, fullName);
       if (needsEmailConfirmation) {
-        setNotice(
-          'Account created. Confirm your email, then sign in to finish setting up your profile.',
-        );
+        setNotice(t('auth.register.confirmNotice'));
         return;
       }
       // Workers must complete their profile before an admin can verify them.
@@ -58,14 +48,14 @@ const Register = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Create your account</h1>
-        <p className="text-gray-600 mb-8">It takes less than a minute.</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('auth.register.title')}</h1>
+        <p className="text-gray-600 mb-8">{t('auth.register.subtitle')}</p>
 
         {notice ? (
           <div className="space-y-6">
             <Alert tone="success">{notice}</Alert>
             <Link to="/login" className="block">
-              <Button className="w-full">Go to sign in</Button>
+              <Button className="w-full">{t('auth.register.goToSignIn')}</Button>
             </Link>
           </div>
         ) : (
@@ -74,10 +64,10 @@ const Register = () => {
 
             <fieldset>
               <legend className="block text-sm font-semibold text-gray-700 mb-3">
-                How will you use BlueForce?
+                {t('auth.register.roleQuestion')}
               </legend>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {ROLES.map(({ value, title, blurb, icon: Icon }) => (
+                {ROLES.map(({ value, icon: Icon }) => (
                   <button
                     key={value}
                     type="button"
@@ -94,24 +84,24 @@ const Register = () => {
                         role === value ? 'text-blue-600' : 'text-gray-400'
                       }`}
                     />
-                    <span className="block font-semibold text-gray-900">{title}</span>
-                    <span className="block text-sm text-gray-600 mt-1">{blurb}</span>
+                    <span className="block font-semibold text-gray-900">{t(`auth.register.${value}Title`)}</span>
+                    <span className="block text-sm text-gray-600 mt-1">{t(`auth.register.${value}Blurb`)}</span>
                   </button>
                 ))}
               </div>
             </fieldset>
 
-            <Field label="Full name">
+            <Field label={t('auth.register.fullName')}>
               <Input
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
                 autoComplete="name"
-                placeholder="Ravi Kumar"
+                placeholder={t('auth.register.namePlaceholder')}
               />
             </Field>
 
-            <Field label="Email">
+            <Field label={t('auth.register.email')}>
               <Input
                 type="email"
                 value={email}
@@ -122,7 +112,7 @@ const Register = () => {
               />
             </Field>
 
-            <Field label="Password" hint="At least 6 characters.">
+            <Field label={t('auth.register.password')} hint={t('auth.register.passwordHint')}>
               <Input
                 type="password"
                 value={password}
@@ -135,15 +125,15 @@ const Register = () => {
             </Field>
 
             <Button type="submit" disabled={loading} className="w-full">
-              {loading ? 'Creating account…' : 'Create account'}
+              {loading ? t('auth.register.submitting') : t('auth.register.submit')}
             </Button>
           </form>
         )}
 
         <p className="text-center text-gray-600 mt-6">
-          Already registered?{' '}
+          {t('auth.register.already')}{' '}
           <Link to="/login" className="text-blue-600 font-semibold hover:underline">
-            Sign in
+            {t('auth.register.signIn')}
           </Link>
         </p>
       </motion.div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { listCategories, updateProfile } from '../../services/profiles';
 import {
@@ -14,7 +15,7 @@ import {
   StatusBadge,
   Textarea,
 } from '../../components/ui';
-import { PROFILE_STATUS_LABELS, type WorkerCategory } from '../../types/database';
+import type { WorkerCategory } from '../../types/database';
 
 /**
  * One profile editor for both roles - worker-only fields simply do not render.
@@ -28,6 +29,7 @@ const Profile = () => {
 };
 
 const ProfileForm = () => {
+  const { t } = useTranslation();
   const { profile, session, refreshProfile, isWorker } = useAuth();
   const [categories, setCategories] = useState<WorkerCategory[]>([]);
   const [saving, setSaving] = useState(false);
@@ -90,59 +92,55 @@ const ProfileForm = () => {
 
   return (
     <>
-      <PageHero title="Your profile" subtitle="Keep your details up to date." />
+      <PageHero title={t('profile.title')} subtitle={t('profile.subtitle')} />
 
       <Section>
         <div className="max-w-2xl mx-auto">
           <Card>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <p className="text-sm text-gray-500">Signed in as</p>
+                <p className="text-sm text-gray-500">{t('profile.signedInAs')}</p>
                 <p className="font-semibold text-gray-900">{profile.email}</p>
               </div>
               <div className="text-right">
-                <p className="text-sm text-gray-500 mb-1 capitalize">{profile.role}</p>
+                <p className="text-sm text-gray-500 mb-1">{t(`profile.roles.${profile.role}`)}</p>
                 {isWorker && (
-                  <StatusBadge
-                    kind="profile"
-                    status={profile.status}
-                    label={PROFILE_STATUS_LABELS[profile.status]}
-                  />
+                  <StatusBadge kind="profile" status={profile.status} />
                 )}
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
               {error && <Alert>{error}</Alert>}
-              {saved && <Alert tone="success">Profile saved.</Alert>}
+              {saved && <Alert tone="success">{t('profile.saved')}</Alert>}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <Field label="Full name">
+                <Field label={t('profile.fullName')}>
                   <Input value={form.full_name} onChange={set('full_name')} required />
                 </Field>
-                <Field label="Mobile number">
+                <Field label={t('profile.mobile')}>
                   <Input type="tel" value={form.mobile} onChange={set('mobile')} />
                 </Field>
               </div>
 
-              <Field label="City">
+              <Field label={t('profile.city')}>
                 <Input value={form.location} onChange={set('location')} />
               </Field>
 
               {isWorker && (
                 <>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <Field label="Trade / category">
+                    <Field label={t('profile.category')}>
                       <Select value={form.category} onChange={set('category')}>
-                        <option value="">Select your trade</option>
+                        <option value="">{t('profile.selectTrade')}</option>
                         {categories.map((c) => (
                           <option key={c.slug} value={c.slug}>
-                            {c.name}
+                            {t(`categories.${c.slug}`, { defaultValue: c.name })}
                           </option>
                         ))}
                       </Select>
                     </Field>
-                    <Field label="Rate per hour (₹)">
+                    <Field label={t('profile.rate')}>
                       <Input
                         type="number"
                         min={0}
@@ -152,7 +150,7 @@ const ProfileForm = () => {
                     </Field>
                   </div>
 
-                  <Field label="Years of experience">
+                  <Field label={t('profile.experience')}>
                     <Input
                       type="number"
                       min={0}
@@ -162,22 +160,22 @@ const ProfileForm = () => {
                     />
                   </Field>
 
-                  <Field label="Skills" hint="Comma separated.">
+                  <Field label={t('profile.skills')} hint={t('profile.skillsHint')}>
                     <Input value={form.skills} onChange={set('skills')} />
                   </Field>
 
-                  <Field label="About you">
+                  <Field label={t('profile.bio')}>
                     <Textarea rows={4} value={form.bio} onChange={set('bio')} />
                   </Field>
 
                   <p className="text-sm text-gray-500">
-                    Changing your trade or rate does not affect your verified status.
+                    {t('profile.statusNote')}
                   </p>
                 </>
               )}
 
               <Button type="submit" disabled={saving} className="w-full">
-                {saving ? 'Saving…' : 'Save changes'}
+                {saving ? t('common.saving') : t('common.save')}
               </Button>
             </form>
           </Card>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { MapPin, Phone } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { listCategories, listProfilesByStatus, setWorkerStatus } from '../../services/profiles';
@@ -11,23 +12,21 @@ import {
   Input,
   Spinner,
   StatusBadge,
+  useCategoryName,
 } from '../../components/ui';
 import { stagger } from '../../lib/motion';
-import {
-  PROFILE_STATUS_LABELS,
-  type Profile,
-  type ProfileStatus,
-  type WorkerCategory,
-} from '../../types/database';
+import type { Profile, ProfileStatus, WorkerCategory } from '../../types/database';
 
-const TABS: { value: ProfileStatus; label: string }[] = [
-  { value: 'pending', label: 'Awaiting review' },
-  { value: 'approved', label: 'Approved' },
-  { value: 'rejected', label: 'Rejected' },
+const TABS: { value: ProfileStatus; labelKey: string }[] = [
+  { value: 'pending', labelKey: 'admin.verification.tabPending' },
+  { value: 'approved', labelKey: 'admin.verification.tabApproved' },
+  { value: 'rejected', labelKey: 'admin.verification.tabRejected' },
 ];
 
 /** The gate in the flow: no worker reaches customers without passing through here. */
 const Verification = () => {
+  const { t } = useTranslation();
+  const categoryLabel = useCategoryName();
   const { session } = useAuth();
   const [tab, setTab] = useState<ProfileStatus>('pending');
   const [workers, setWorkers] = useState<Profile[]>([]);
@@ -81,18 +80,17 @@ const Verification = () => {
   };
 
   const categoryName = (slug: string | null) =>
-    categories.find((c) => c.slug === slug)?.name ?? slug ?? '—';
+    slug ? categoryLabel(slug, categories.find((c) => c.slug === slug)?.name) : t('common.none');
 
   return (
     <div>
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Worker verification</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('admin.verification.title')}</h1>
       <p className="text-gray-600 mb-8">
-        Approve a worker to make them visible and bookable. Rejected workers can fix
-        their details and be reviewed again.
+        {t('admin.verification.subtitle')}
       </p>
 
       <div className="flex flex-wrap gap-2 mb-8">
-        {TABS.map(({ value, label }) => (
+        {TABS.map(({ value, labelKey }) => (
           <button
             key={value}
             onClick={() => setTab(value)}
@@ -102,7 +100,7 @@ const Verification = () => {
                 : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-300'
             }`}
           >
-            {label}
+            {t(labelKey)}
           </button>
         ))}
       </div>
@@ -114,15 +112,19 @@ const Verification = () => {
       )}
 
       {loading ? (
-        <Spinner label="Loading workers" />
+        <Spinner label={t('admin.verification.loading')} />
       ) : workers.length === 0 ? (
         <EmptyState
-          title={tab === 'pending' ? 'Nothing to review' : `No ${tab} workers`}
-          message={
+          title={t(
             tab === 'pending'
-              ? 'New worker registrations will appear here for approval.'
-              : 'Workers you have actioned will be listed here.'
-          }
+              ? 'admin.verification.emptyPendingTitle'
+              : 'admin.verification.emptyOtherTitle',
+          )}
+          message={t(
+            tab === 'pending'
+              ? 'admin.verification.emptyPendingBody'
+              : 'admin.verification.emptyOtherBody',
+          )}
         />
       ) : (
         <motion.div className="space-y-4" variants={stagger} initial="hidden" animate="show">
@@ -132,34 +134,30 @@ const Verification = () => {
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-3 mb-3">
                     <h3 className="text-xl font-bold text-gray-900">{worker.full_name}</h3>
-                    <StatusBadge
-                      kind="profile"
-                      status={worker.status}
-                      label={PROFILE_STATUS_LABELS[worker.status]}
-                    />
+                    <StatusBadge kind="profile" status={worker.status} />
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                     <div>
-                      <p className="text-xs text-gray-500">Trade</p>
+                      <p className="text-xs text-gray-500">{t('admin.verification.trade')}</p>
                       <p className="font-semibold text-gray-900">
                         {categoryName(worker.category)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Experience</p>
+                      <p className="text-xs text-gray-500">{t('admin.verification.experience')}</p>
                       <p className="font-semibold text-gray-900">
-                        {worker.experience_years ?? '—'} yrs
+                        {worker.experience_years ?? t('common.none')} {t('common.years')}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Rate</p>
+                      <p className="text-xs text-gray-500">{t('admin.verification.rate')}</p>
                       <p className="font-semibold text-gray-900">
-                        {worker.hourly_rate != null ? `₹${worker.hourly_rate}/hr` : '—'}
+                        {worker.hourly_rate != null ? `₹${worker.hourly_rate}${t('common.perHourShort')}` : t('common.none')}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Registered</p>
+                      <p className="text-xs text-gray-500">{t('admin.verification.registered')}</p>
                       <p className="font-semibold text-gray-900">
                         {new Date(worker.created_at).toLocaleDateString()}
                       </p>
@@ -199,7 +197,7 @@ const Verification = () => {
 
                   {worker.status === 'rejected' && worker.rejection_reason && (
                     <p className="mt-3 text-sm text-red-600">
-                      Reason: {worker.rejection_reason}
+                      {t('admin.verification.reasonLabel')}: {worker.rejection_reason}
                     </p>
                   )}
                 </div>
@@ -209,7 +207,7 @@ const Verification = () => {
                     <div className="space-y-3">
                       <Input
                         autoFocus
-                        placeholder="Reason for rejection"
+                        placeholder={t('admin.verification.reasonPlaceholder')}
                         value={reason}
                         onChange={(e) => setReason(e.target.value)}
                       />
@@ -219,7 +217,7 @@ const Verification = () => {
                           className="flex-1"
                           onClick={() => decide(worker.id, 'rejected', reason)}
                         >
-                          Confirm
+                          {t('common.confirm')}
                         </Button>
                         <Button
                           variant="secondary"
@@ -229,7 +227,7 @@ const Verification = () => {
                             setReason('');
                           }}
                         >
-                          Cancel
+                          {t('common.cancel')}
                         </Button>
                       </div>
                     </div>
@@ -240,12 +238,12 @@ const Verification = () => {
                           variant="success"
                           onClick={() => decide(worker.id, 'approved')}
                         >
-                          Approve worker
+                          {t('admin.verification.approve')}
                         </Button>
                       )}
                       {worker.status !== 'rejected' && (
                         <Button variant="secondary" onClick={() => setRejecting(worker.id)}>
-                          Reject
+                          {t('admin.verification.reject')}
                         </Button>
                       )}
                     </div>

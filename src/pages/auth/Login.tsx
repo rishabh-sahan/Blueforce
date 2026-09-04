@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { Alert, Button, Field, Input } from '../../components/ui';
 import { EASE } from '../../lib/motion';
 
 const Login = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const { login, loading, error, clearError } = useAuth();
@@ -35,13 +37,13 @@ const Login = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
-        <p className="text-gray-600 mb-8">Sign in to manage your bookings.</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('auth.login.title')}</h1>
+        <p className="text-gray-600 mb-8">{t('auth.login.subtitle')}</p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {error && <Alert>{error}</Alert>}
 
-          <Field label="Email">
+          <Field label={t('auth.login.email')}>
             <Input
               type="email"
               value={email}
@@ -52,7 +54,7 @@ const Login = () => {
             />
           </Field>
 
-          <Field label="Password">
+          <Field label={t('auth.login.password')}>
             <Input
               type="password"
               value={password}
@@ -64,14 +66,14 @@ const Login = () => {
           </Field>
 
           <Button type="submit" disabled={loading} className="w-full">
-            {loading ? 'Signing in…' : 'Sign in'}
+            {loading ? t('common.signingIn') : t('common.signIn')}
           </Button>
         </form>
 
         <p className="text-center text-gray-600 mt-6">
-          New here?{' '}
+          {t('auth.login.newHere')}{' '}
           <Link to="/register" className="text-blue-600 font-semibold hover:underline">
-            Create an account
+            {t('auth.login.createAccount')}
           </Link>
         </p>
       </motion.div>

@@ -129,15 +129,15 @@ const Home = () => {
             images={[
               {
                 src: "https://miro.medium.com/v2/resize:fit:1400/0*k6-msqB4P6Ik1G2B",
-                alt: "Group of blue-collar workers in hard hats"
+                alt: t('home.slider.alt1')
               },
               {
                 src: "https://i.pinimg.com/736x/be/ba/6e/beba6e3905c7f21b71743861e8560b51.jpg",
-                alt: "Skilled blue-collar professionals standing together with their tools"
+                alt: t('home.slider.alt2')
               },
               {
                 src: "https://i.pinimg.com/736x/e3/d7/2e/e3d72e9d7756d73afa3de65c8823db88.jpg",
-                alt: "Electrician working on wiring"
+                alt: t('home.slider.alt3')
               }
             ]}
           />
@@ -152,7 +152,7 @@ const Home = () => {
             to="/workers"
             className="inline-flex items-center gap-3 px-9 py-4 bg-blue-600 text-white rounded-xl text-lg font-semibold hover:bg-blue-700 transition-colors shadow-xl"
           >
-            Book a verified worker
+            {t('home.cta.book')}
             <ArrowRight className="h-5 w-5" />
           </Link>
         </motion.div>
@@ -162,7 +162,7 @@ const Home = () => {
             to="/register"
             className="inline-flex items-center gap-3 px-9 py-4 bg-green-600 text-white rounded-xl text-lg font-semibold hover:bg-green-700 transition-colors shadow-xl"
           >
-            Register as a worker
+            {t('home.cta.join')}
             <ArrowRight className="h-5 w-5" />
           </Link>
         </motion.div>
@@ -178,7 +178,7 @@ const Home = () => {
                 <div className="relative">
                   <img
                     src="https://media.istockphoto.com/id/1189913170/photo/engineer-and-businessman-handshake-at-construction-site.jpg?s=612x612&w=0&k=20&c=LAGNJv533KQKPrb71GiavOCaTKVI5IfR_QioV_t88hM="
-                    alt="Professional handshake between engineer and businessman"
+                    alt={t('home.trust.imageAlt')}
                     className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-lg"
                   />
                   <div className="absolute inset-0 bg-blue-600 bg-opacity-10 rounded-2xl"></div>
@@ -193,7 +193,7 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6 }}
                 >
-                  Trusted by Thousands for <span className="text-blue-600">Professional Service</span>
+                  {t('home.trust.titleLead')} <span className="text-blue-600">{t('home.trust.titleAccent')}</span>
                 </motion.h2>
                 <motion.p
                   className="text-lg text-gray-600 mb-6"
@@ -202,7 +202,7 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.1 }}
                 >
-                  Our certified technicians deliver reliable, high-quality service with a focus on customer satisfaction and safety. Experience the difference with BlueForce.
+                  {t('home.trust.body')}
                 </motion.p>
 
                 {/* Stats Grid */}
@@ -211,13 +211,13 @@ const Home = () => {
                     <div className="text-3xl font-bold text-blue-600 mb-1">
                       <AnimatedCounter value={98} />%
                     </div>
-                    <div className="text-gray-600">Satisfaction Rate</div>
+                    <div className="text-gray-600">{t('home.trust.satisfaction')}</div>
                   </div>
                   <div className="bg-blue-50 rounded-xl p-4">
                     <div className="text-3xl font-bold text-blue-600 mb-1">
                       <AnimatedCounter value={5000} />+
                     </div>
-                    <div className="text-gray-600">Active Professionals</div>
+                    <div className="text-gray-600">{t('home.trust.professionals')}</div>
                   </div>
                 </div>
 
@@ -232,7 +232,7 @@ const Home = () => {
                       to="/about-us"
                       className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow transition focus:outline-none focus:ring-2 focus:ring-blue-300"
                     >
-                      More About Us
+                      {t('home.trust.moreAbout')}
                     </Link>
                   </motion.div>
                   <motion.div
@@ -245,7 +245,7 @@ const Home = () => {
                       to="/how-it-works"
                       className="inline-block bg-white hover:bg-gray-50 text-blue-600 font-semibold px-8 py-3 rounded-full shadow border-2 border-blue-600 transition focus:outline-none focus:ring-2 focus:ring-blue-300"
                     >
-                      How It Works
+                      {t('home.trust.howItWorks')}
                     </Link>
                   </motion.div>
                 </div>
@@ -264,8 +264,8 @@ const Home = () => {
           <div className="bg-white rounded-3xl shadow-xl border-4 border-blue-100 relative flex flex-col md:flex-row items-start gap-8 p-6 md:p-8">
             {/* Left Side */}
             <div className="flex-1 flex flex-col z-10">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">What Makes <span className="text-blue-600">BlueForce</span> Stand Out</h2>
-              <p className="text-lg text-gray-600 mb-6">We go beyond just connecting workers and employers. BlueForce empowers, protects, and includes everyone in the workforce ecosystem.</p>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{t('home.standOut.titleLead')} <span className="text-blue-600">BlueForce</span> {t('home.standOut.titleTail')}</h2>
+              <p className="text-lg text-gray-600 mb-6">{t('home.standOut.body')}</p>
               
               {/* Feature Highlights */}
               <div className="space-y-4">
@@ -273,19 +273,19 @@ const Home = () => {
                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <Shield className="w-4 h-4 text-blue-600" />
                   </div>
-                  <span className="text-gray-700 font-medium">Verified Professionals</span>
+                  <span className="text-gray-700 font-medium">{t('home.standOut.verified')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <Clock className="w-4 h-4 text-blue-600" />
                   </div>
-                  <span className="text-gray-700 font-medium">24/7 Support</span>
+                  <span className="text-gray-700 font-medium">{t('home.standOut.support')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
                     <Users className="w-4 h-4 text-blue-600" />
                   </div>
-                  <span className="text-gray-700 font-medium">Global Network</span>
+                  <span className="text-gray-700 font-medium">{t('home.standOut.network')}</span>
                 </div>
               </div>
 
@@ -295,7 +295,7 @@ const Home = () => {
                   onClick={() => setShowLearnMore(true)}
                   className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors"
                 >
-                  Learn More
+                  {t('home.standOut.learnMore')}
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -414,7 +414,7 @@ const Home = () => {
                 <Shield className="w-8 h-8 text-blue-600" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2">{t('home.whyUs.value')}</h3>
-              <p className="text-gray-600">Fair pricing and transparent fee structure for all users.</p>
+              <p className="text-gray-600">{t('home.whyUs.valueBody')}</p>
             </motion.div>
             
             <motion.div 
@@ -430,7 +430,7 @@ const Home = () => {
                 <Users className="w-8 h-8 text-blue-600" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2">{t('home.whyUs.accessibility')}</h3>
-              <p className="text-gray-600">Multiple languages and intuitive design for all users.</p>
+              <p className="text-gray-600">{t('home.whyUs.accessibilityBody')}</p>
             </motion.div>
             
             <motion.div 
@@ -446,7 +446,7 @@ const Home = () => {
                 <Shield className="w-8 h-8 text-blue-600" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2">{t('home.whyUs.trust')}</h3>
-              <p className="text-gray-600">Verified workers and secure payment system built on trust.</p>
+              <p className="text-gray-600">{t('home.whyUs.trustBody')}</p>
             </motion.div>
             
             <motion.div 
@@ -462,7 +462,7 @@ const Home = () => {
                 <Clock className="w-8 h-8 text-blue-600" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2">{t('home.whyUs.empowerment')}</h3>
-              <p className="text-gray-600">Empowering workers with better opportunities and growth.</p>
+              <p className="text-gray-600">{t('home.whyUs.empowermentBody')}</p>
             </motion.div>
           </motion.div>
         </div>
@@ -471,7 +471,7 @@ const Home = () => {
       {/* FAQ Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-3xl font-bold text-center mb-10">Frequently Asked Questions</h2>
+          <h2 className="text-3xl font-bold text-center mb-10">{t('home.faq.title')}</h2>
           <div className="space-y-4">
             {faqs.map((faq, idx) => (
               <div key={idx} className="border border-gray-200 rounded-xl bg-gray-50">
@@ -512,7 +512,7 @@ const Home = () => {
             viewport={VIEWPORT}
             transition={{ duration: 0.5, ease: EASE }}
           >
-            Ready to get started?
+            {t('home.ctaSection.title')}
           </motion.h2>
           <motion.p 
             className="text-xl mb-8 max-w-2xl mx-auto"
@@ -521,7 +521,7 @@ const Home = () => {
             viewport={VIEWPORT}
             transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
           >
-            Join thousands of workers and employers already using BlueForce to connect, work, and grow.
+            {t('home.ctaSection.body')}
           </motion.p>
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -535,7 +535,7 @@ const Home = () => {
               to="/register"
               className="bg-white text-blue-700 hover:bg-gray-100 px-8 py-3 rounded-full font-medium text-lg inline-block"
             >
-              Sign Up Now
+              {t('home.ctaSection.button')}
             </Link>
           </motion.div>
         </div>
@@ -563,11 +563,11 @@ const Home = () => {
           >
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h3 id="learn-more-title" className="text-2xl font-bold text-gray-900">Discover BlueForce</h3>
+                <h3 id="learn-more-title" className="text-2xl font-bold text-gray-900">{t('home.modal.title')}</h3>
                 <button
                   onClick={() => setShowLearnMore(false)}
                   className="text-gray-500 hover:text-gray-700"
-                  aria-label="Close"
+                  aria-label={t('home.modal.close')}
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -575,50 +575,50 @@ const Home = () => {
 
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-xl font-semibold text-blue-600 mb-2">Our Mission</h4>
+                  <h4 className="text-xl font-semibold text-blue-600 mb-2">{t('home.modal.missionTitle')}</h4>
                   <p className="text-gray-600">
-                    BlueForce is dedicated to revolutionizing the blue-collar workforce by creating a platform that connects skilled professionals with opportunities that match their expertise.
+                    {t('home.modal.missionBody')}
                   </p>
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-semibold text-blue-600 mb-2">Key Benefits</h4>
+                  <h4 className="text-xl font-semibold text-blue-600 mb-2">{t('home.modal.benefitsTitle')}</h4>
                   <ul className="space-y-3">
                     <li className="flex items-start gap-3">
                       <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
                         <Shield className="w-3 h-3 text-blue-600" />
                       </div>
-                      <span className="text-gray-600">Secure and verified worker profiles with skill assessments</span>
+                      <span className="text-gray-600">{t('home.modal.benefit1')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
                         <Clock className="w-3 h-3 text-blue-600" />
                       </div>
-                      <span className="text-gray-600">Flexible scheduling and real-time availability tracking</span>
+                      <span className="text-gray-600">{t('home.modal.benefit2')}</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mt-1">
                         <Users className="w-3 h-3 text-blue-600" />
                       </div>
-                      <span className="text-gray-600">Access to a diverse network of skilled professionals</span>
+                      <span className="text-gray-600">{t('home.modal.benefit3')}</span>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h4 className="text-xl font-semibold text-blue-600 mb-2">How It Works</h4>
+                  <h4 className="text-xl font-semibold text-blue-600 mb-2">{t('home.modal.howTitle')}</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="bg-blue-50 p-4 rounded-xl">
-                      <div className="text-blue-600 font-bold mb-2">1. Create Profile</div>
-                      <p className="text-gray-600 text-sm">Sign up and create your professional profile with skills and experience</p>
+                      <div className="text-blue-600 font-bold mb-2">{t('home.modal.step1Title')}</div>
+                      <p className="text-gray-600 text-sm">{t('home.modal.step1Body')}</p>
                     </div>
                     <div className="bg-blue-50 p-4 rounded-xl">
-                      <div className="text-blue-600 font-bold mb-2">2. Find Opportunities</div>
-                      <p className="text-gray-600 text-sm">Browse and apply for jobs that match your expertise</p>
+                      <div className="text-blue-600 font-bold mb-2">{t('home.modal.step2Title')}</div>
+                      <p className="text-gray-600 text-sm">{t('home.modal.step2Body')}</p>
                     </div>
                     <div className="bg-blue-50 p-4 rounded-xl">
-                      <div className="text-blue-600 font-bold mb-2">3. Get Hired</div>
-                      <p className="text-gray-600 text-sm">Connect with employers and start your journey</p>
+                      <div className="text-blue-600 font-bold mb-2">{t('home.modal.step3Title')}</div>
+                      <p className="text-gray-600 text-sm">{t('home.modal.step3Body')}</p>
                     </div>
                   </div>
                 </div>
@@ -629,7 +629,7 @@ const Home = () => {
                     onClick={() => setShowLearnMore(false)}
                     className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-medium hover:bg-blue-700 transition-colors"
                   >
-                    Get Started Now
+                    {t('home.modal.getStarted')}
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>

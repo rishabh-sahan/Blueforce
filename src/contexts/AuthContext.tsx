@@ -47,6 +47,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // One subscription drives everything: the initial session, sign-in, sign-out
   // and token refresh all arrive through the same callback.
+  //
+  // `initialising` stays true for the whole session+profile round trip, not just
+  // the first one. Without that, the moment after sign-in has a session but no
+  // profile yet, and route guards read that as "this account has no profile"
+  // and bounce the user to onboarding.
   useEffect(() => {
     let active = true;
 
@@ -58,6 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setInitialising(false);
         return;
       }
+      setInitialising(true);
       try {
         const row = await getProfile(nextSession.user.id);
         if (active) setProfile(row);

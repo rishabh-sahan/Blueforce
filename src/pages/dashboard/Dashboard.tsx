@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { CalendarClock, MapPin, Phone } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import {
@@ -20,12 +21,7 @@ import {
   StatusBadge,
 } from '../../components/ui';
 import { stagger } from '../../lib/motion';
-import {
-  BOOKING_STATUS_LABELS,
-  PROFILE_STATUS_LABELS,
-  type BookingStatus,
-  type BookingWithParties,
-} from '../../types/database';
+import type { BookingStatus, BookingWithParties } from '../../types/database';
 
 const formatWhen = (iso: string) =>
   new Date(iso).toLocaleString(undefined, {
@@ -37,6 +33,7 @@ const formatWhen = (iso: string) =>
   });
 
 const Dashboard = () => {
+  const { t } = useTranslation();
   const { profile, session, isWorker } = useAuth();
   const [bookings, setBookings] = useState<BookingWithParties[]>([]);
   const [loading, setLoading] = useState(true);
@@ -72,18 +69,14 @@ const Dashboard = () => {
 
   if (!profile) return <Spinner />;
 
-  const firstName = profile.full_name.split(' ')[0] || 'there';
+  const firstName = profile.full_name.split(' ')[0];
   const pendingVerification = isWorker && profile.status !== 'approved';
 
   return (
     <>
       <PageHero
-        title={`Welcome back, ${firstName}`}
-        subtitle={
-          isWorker
-            ? 'Appointment requests from customers appear here.'
-            : 'Track the appointments you have booked.'
-        }
+        title={t('dashboard.welcome', { name: firstName })}
+        subtitle={t(isWorker ? 'dashboard.workerSubtitle' : 'dashboard.customerSubtitle')}
       />
 
       <Section>
@@ -94,22 +87,17 @@ const Dashboard = () => {
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <h2 className="text-xl font-bold text-gray-900">Verification</h2>
-                    <StatusBadge
-                      kind="profile"
-                      status={profile.status}
-                      label={PROFILE_STATUS_LABELS[profile.status]}
-                    />
+                    <h2 className="text-xl font-bold text-gray-900">{t('dashboard.verification')}</h2>
+                    <StatusBadge kind="profile" status={profile.status} />
                   </div>
                   <p className="text-gray-600 max-w-xl">
                     {profile.status === 'pending'
-                      ? 'Our team is reviewing your profile. Once approved you will appear in search results and can receive bookings.'
-                      : profile.rejection_reason ||
-                        'Your profile was not approved. Update your details and it will be reviewed again.'}
+                      ? t('dashboard.pendingBody')
+                      : profile.rejection_reason || t('dashboard.rejectedBody')}
                   </p>
                 </div>
                 <ButtonLink to="/onboarding" variant="secondary">
-                  Edit profile
+                  {t('dashboard.editProfile')}
                 </ButtonLink>
               </div>
             </Card>
@@ -118,26 +106,28 @@ const Dashboard = () => {
 
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-2xl font-bold text-gray-900">
-            {isWorker ? 'Appointment requests' : 'My bookings'}
+            {t(isWorker ? 'dashboard.requestsTitle' : 'dashboard.bookingsTitle')}
           </h2>
-          {!isWorker && <ButtonLink to="/workers">Book a worker</ButtonLink>}
+          {!isWorker && <ButtonLink to="/workers">{t('dashboard.bookWorker')}</ButtonLink>}
         </div>
 
         {error && <Alert>{error}</Alert>}
 
         {loading ? (
-          <Spinner label="Loading bookings" />
+          <Spinner label={t('dashboard.loadingBookings')} />
         ) : bookings.length === 0 ? (
           <EmptyState
-            title={isWorker ? 'No requests yet' : 'No bookings yet'}
+            title={t(isWorker ? 'dashboard.emptyWorkerTitle' : 'dashboard.emptyCustomerTitle')}
             message={
               isWorker
-                ? profile.status === 'approved'
-                  ? 'Customers can find you in search. New requests will show up here.'
-                  : 'Once your profile is verified, customers can find and book you.'
-                : 'Browse verified workers and request an appointment.'
+                ? t(
+                    profile.status === 'approved'
+                      ? 'dashboard.emptyWorkerApproved'
+                      : 'dashboard.emptyWorkerPending',
+                  )
+                : t('dashboard.emptyCustomer')
             }
-            action={!isWorker ? <ButtonLink to="/workers">Find a worker</ButtonLink> : undefined}
+            action={!isWorker ? <ButtonLink to="/workers">{t('dashboard.findWorker')}</ButtonLink> : undefined}
           />
         ) : (
           <motion.div
@@ -154,12 +144,9 @@ const Dashboard = () => {
                     <div className="min-w-0">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-bold text-lg text-gray-900">
-                          {other?.full_name ?? (isWorker ? 'Customer' : 'Worker')}
+                          {other?.full_name ?? t(isWorker ? 'dashboard.customer' : 'dashboard.worker')}
                         </h3>
-                        <StatusBadge
-                          status={booking.status}
-                          label={BOOKING_STATUS_LABELS[booking.status]}
-                        />
+                        <StatusBadge status={booking.status} />
                       </div>
                       <div className="space-y-1 text-sm text-gray-600">
                         <p className="flex items-center gap-2">
@@ -190,19 +177,19 @@ const Dashboard = () => {
                             variant="success"
                             onClick={() => move(booking.id, 'accepted')}
                           >
-                            Accept
+                            {t('dashboard.accept')}
                           </Button>
                           <Button
                             variant="secondary"
                             onClick={() => move(booking.id, 'declined')}
                           >
-                            Decline
+                            {t('dashboard.decline')}
                           </Button>
                         </>
                       )}
                       {isWorker && booking.status === 'accepted' && (
                         <Button onClick={() => move(booking.id, 'completed')}>
-                          Mark completed
+                          {t('dashboard.markCompleted')}
                         </Button>
                       )}
                       {!isWorker && ['pending', 'accepted'].includes(booking.status) && (
@@ -210,7 +197,7 @@ const Dashboard = () => {
                           variant="secondary"
                           onClick={() => move(booking.id, 'cancelled')}
                         >
-                          Cancel
+                          {t('dashboard.cancel')}
                         </Button>
                       )}
                     </div>
@@ -222,9 +209,9 @@ const Dashboard = () => {
         )}
 
         <p className="text-center text-gray-500 mt-12">
-          Need to change your details?{' '}
+          {t('dashboard.editPrompt')}{' '}
           <Link to="/profile" className="text-blue-600 font-semibold hover:underline">
-            Edit your profile
+            {t('dashboard.editLink')}
           </Link>
         </p>
       </Section>

@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import type { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { Spinner } from './ui';
 import type { UserRole } from '../types/database';
@@ -19,10 +20,11 @@ const RequireAuth = ({
   roles?: UserRole[];
   redirectTo?: string;
 }) => {
+  const { t } = useTranslation();
   const { session, profile, initialising } = useAuth();
   const location = useLocation();
 
-  if (initialising) return <Spinner label="Checking your session" />;
+  if (initialising) return <Spinner label={t('common.checkingSession')} />;
 
   if (!session) {
     return <Navigate to={redirectTo} replace state={{ from: location.pathname }} />;

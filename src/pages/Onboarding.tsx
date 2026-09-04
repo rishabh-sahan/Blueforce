@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
 import { listCategories, updateProfile } from '../services/profiles';
 import { Alert, Button, Field, Input, Select, Spinner, Textarea } from '../components/ui';
@@ -13,9 +14,10 @@ import type { WorkerCategory } from '../types/database';
  * sign-up with the role the person chose.
  */
 const Onboarding = () => {
+  const { t } = useTranslation();
   const { session, profile, initialising } = useAuth();
 
-  if (initialising) return <Spinner label="Loading your account" />;
+  if (initialising) return <Spinner label={t('common.loadingAccount')} />;
   if (!session) return <Navigate to="/login" replace />;
   // A customer has nothing to complete here.
   if (profile?.role === 'customer') return <Navigate to="/dashboard" replace />;
@@ -26,6 +28,7 @@ const Onboarding = () => {
 };
 
 const OnboardingForm = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { session, profile, refreshProfile } = useAuth();
   const [categories, setCategories] = useState<WorkerCategory[]>([]);
@@ -88,20 +91,19 @@ const OnboardingForm = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: EASE }}
       >
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Complete your worker profile</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('onboarding.title')}</h1>
         <p className="text-gray-600 mb-8">
-          Our team reviews every worker before they appear in search results. Fill this
-          in accurately so verification is quick.
+          {t('onboarding.body')}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
           {error && <Alert>{error}</Alert>}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <Field label="Full name">
+            <Field label={t('onboarding.fullName')}>
               <Input value={form.full_name} onChange={set('full_name')} required />
             </Field>
-            <Field label="Mobile number">
+            <Field label={t('onboarding.mobile')}>
               <Input
                 value={form.mobile}
                 onChange={set('mobile')}
@@ -113,28 +115,28 @@ const OnboardingForm = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <Field label="Trade / category">
+            <Field label={t('onboarding.category')}>
               <Select value={form.category} onChange={set('category')} required>
-                <option value="">Select your trade</option>
+                <option value="">{t('onboarding.selectTrade')}</option>
                 {categories.map((c) => (
                   <option key={c.slug} value={c.slug}>
-                    {c.name}
+                    {t(`categories.${c.slug}`, { defaultValue: c.name })}
                   </option>
                 ))}
               </Select>
             </Field>
-            <Field label="City">
+            <Field label={t('onboarding.city')}>
               <Input
                 value={form.location}
                 onChange={set('location')}
                 required
-                placeholder="Bengaluru"
+                placeholder={t('onboarding.cityPlaceholder')}
               />
             </Field>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <Field label="Years of experience">
+            <Field label={t('onboarding.experience')}>
               <Input
                 type="number"
                 min={0}
@@ -144,7 +146,7 @@ const OnboardingForm = () => {
                 required
               />
             </Field>
-            <Field label="Rate per hour (₹)">
+            <Field label={t('onboarding.rate')}>
               <Input
                 type="number"
                 min={0}
@@ -155,16 +157,16 @@ const OnboardingForm = () => {
             </Field>
           </div>
 
-          <Field label="Skills" hint="Comma separated, e.g. Wiring, Maintenance, Repairs">
+          <Field label={t('onboarding.skills')} hint={t('onboarding.skillsHint')}>
             <Input value={form.skills} onChange={set('skills')} />
           </Field>
 
-          <Field label="About you" hint="A short introduction customers will read.">
+          <Field label={t('onboarding.bio')} hint={t('onboarding.bioHint')}>
             <Textarea rows={4} value={form.bio} onChange={set('bio')} />
           </Field>
 
           <Button type="submit" disabled={saving} className="w-full">
-            {saving ? 'Submitting…' : 'Submit for verification'}
+            {saving ? t('onboarding.submitting') : t('onboarding.submit')}
           </Button>
         </form>
       </motion.div>

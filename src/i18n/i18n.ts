@@ -45,4 +45,14 @@ i18n
     }
   });
 
+// Keep the document language attribute in step with the active locale.
+const applyDocumentLanguage = (lng: string) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = lng;
+  }
+};
+
+applyDocumentLanguage(i18n.language);
+i18n.on('languageChanged', applyDocumentLanguage);
+
 export default i18n;

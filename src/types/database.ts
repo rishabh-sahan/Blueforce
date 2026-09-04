@@ -83,16 +83,6 @@ export type ProfileUpdate = Partial<
   >
 >;
 
-export const BOOKING_STATUS_LABELS: Record<BookingStatus, string> = {
-  pending: 'Awaiting worker',
-  accepted: 'Confirmed',
-  declined: 'Declined',
-  completed: 'Completed',
-  cancelled: 'Cancelled',
-};
-
-export const PROFILE_STATUS_LABELS: Record<ProfileStatus, string> = {
-  pending: 'Pending verification',
-  approved: 'Verified',
-  rejected: 'Rejected',
-};
+// Status labels live in the translation files under `status.booking.*` and
+// `status.profile.*` - a module-level constant map could not react to a
+// language change.

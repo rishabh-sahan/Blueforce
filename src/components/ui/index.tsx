@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import type { ReactNode } from 'react';
 import { EASE, VIEWPORT, fadeUp } from '../../lib/motion';
 import type { BookingStatus, ProfileStatus } from '../../types/database';
@@ -204,25 +205,27 @@ const BOOKING_TONES: Record<BookingStatus, string> = {
   cancelled: 'bg-gray-200 text-gray-700',
 };
 
+/** Resolves its own label from `status.<kind>.<status>` in the active language. */
 export const StatusBadge = ({
   status,
-  label,
   kind = 'booking',
 }: {
   status: BookingStatus | ProfileStatus;
-  label: string;
   kind?: 'booking' | 'profile';
-}) => (
-  <span
-    className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
-      kind === 'profile'
-        ? PROFILE_TONES[status as ProfileStatus]
-        : BOOKING_TONES[status as BookingStatus]
-    }`}
-  >
-    {label}
-  </span>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <span
+      className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${
+        kind === 'profile'
+          ? PROFILE_TONES[status as ProfileStatus]
+          : BOOKING_TONES[status as BookingStatus]
+      }`}
+    >
+      {t(`status.${kind}.${status}`)}
+    </span>
+  );
+};
 
 export const Alert = ({
   tone = 'error',
@@ -243,12 +246,31 @@ export const Alert = ({
   );
 };
 
-export const Spinner = ({ label = 'Loading' }: { label?: string }) => (
-  <div className="flex items-center justify-center gap-3 py-16 text-gray-500">
-    <span className="w-6 h-6 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin" />
-    {label}
-  </div>
-);
+export const Spinner = ({ label }: { label?: string }) => {
+  const { t } = useTranslation();
+  return (
+    <div className="flex items-center justify-center gap-3 py-16 text-gray-500">
+      <span className="w-6 h-6 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin" />
+      {label ?? t('common.loading')}
+    </div>
+  );
+};
+
+/**
+ * Resolves a worker category to the active language. The database stores the
+ * English name, so that is the fallback when a slug has no translation yet.
+ */
+export const useCategoryName = () => {
+  const { t } = useTranslation();
+  return (slug: string | null | undefined, fallback?: string | null) =>
+    slug ? t(`categories.${slug}`, { defaultValue: fallback ?? slug }) : (fallback ?? '');
+};
+
+/** Booking / profile status label in the active language. */
+export const useStatusLabel = () => {
+  const { t } = useTranslation();
+  return (kind: 'booking' | 'profile', status: string) => t(`status.${kind}.${status}`);
+};
 
 export const EmptyState = ({
   title,
