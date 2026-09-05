@@ -3,4 +3,4 @@ dist
 .env
 .env.local
 tsconfig.tsbuildinfo
-Notes.txt
+Info.txt
